@@ -6,6 +6,8 @@ import G7_TTN.reponsitory.ProductRepository;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProductService {
 
@@ -15,6 +17,7 @@ public class ProductService {
         this.productRepo = productRepo;
     }
 
+    // ================= LIST USER =================
     public Page<Product> getAll(String keyword, Category category, int page, String sort) {
 
         Sort sorting;
@@ -39,7 +42,38 @@ public class ProductService {
         return productRepo.findByNameContainingIgnoreCase(keyword, pageable);
     }
 
+    // ================= ADMIN =================
+
+    // Lấy tất cả (không phân trang)
+    public List<Product> findAll() {
+        return productRepo.findAll();
+    }
+
+    // Lưu (add + update)
+    public void save(Product product) {
+        productRepo.save(product);
+    }
+
+    // Xóa
+    public void delete(Long id) {
+        productRepo.deleteById(id);
+    }
+
+    // Đếm
+    public long count() {
+        return productRepo.count();
+    }
+
+    // ================= DETAIL =================
     public Product findById(Long id) {
         return productRepo.findById(id).orElse(null);
+    }
+    public Page<Product> getSaleProducts(int page) {
+
+        Pageable pageable =
+                PageRequest.of(page, 8,
+                        Sort.by("id").descending());
+
+        return productRepo.getSaleProducts(pageable);
     }
 }

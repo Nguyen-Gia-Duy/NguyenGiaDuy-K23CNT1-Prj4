@@ -66,7 +66,28 @@ public class ProductController {
         model.addAttribute("images", imageService.getByProduct(product));
         model.addAttribute("variants", variantService.getByProduct(product));
 
-        return "user/product-detail";
+        return "user/product/detail";
     }
+    @GetMapping("/sale")
+    public String sale(
+            @RequestParam(defaultValue = "0") int page,
+            Model model
+    ) {
 
+        Page<Product> result =
+                productService.getSaleProducts(page);
+
+        model.addAttribute("products",
+                result.getContent());
+
+        model.addAttribute("currentPage", page);
+
+        model.addAttribute("totalPages",
+                result.getTotalPages());
+
+        model.addAttribute("categories",
+                categoryRepo.findAll());
+
+        return "user/product/sale";
+    }
 }

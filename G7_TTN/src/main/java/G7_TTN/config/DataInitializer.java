@@ -1,14 +1,11 @@
 package G7_TTN.config;
 
 import jakarta.annotation.PostConstruct;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import G7_TTN.entity.Users;
 import G7_TTN.reponsitory.UserReponsitory;
-
-import java.util.Date;
 
 @Component
 public class DataInitializer {
@@ -22,17 +19,37 @@ public class DataInitializer {
     }
 
     @PostConstruct
-    public void initAdmin() {
-        if (userRepo.findByUsername("admin") == null) {
-            Users admin = new Users();
+    public void initData() {
+
+        // ===== ADMIN =====
+        Users admin = userRepo.findByUsername("admin").orElse(null);
+
+        if (admin == null) {
+            admin = new Users();
             admin.setUsername("admin");
-            admin.setPassword(encoder.encode("123"));
             admin.setName("Admin");
             admin.setRole("ADMIN");
             admin.setIsactive(1);
-
-            userRepo.save(admin);
-            System.out.println("✅ Admin created");
         }
+
+        admin.setPassword(encoder.encode("123"));
+        userRepo.save(admin);
+
+
+        // ===== USER =====
+        Users user = userRepo.findByUsername("user").orElse(null);
+
+        if (user == null) {
+            user = new Users();
+            user.setUsername("user");
+            user.setName("User");
+            user.setRole("USER");
+            user.setIsactive(1);
+        }
+
+        user.setPassword(encoder.encode("123"));
+        userRepo.save(user);
+
+        System.out.println("✅ Data initialized");
     }
 }

@@ -13,9 +13,11 @@ public class Product_images {
     private Long id;
 
     private String name;
+
     private String urlimg;
 
     @ManyToOne
     @JoinColumn(name = "idproduct")
     private Product product;
+
 }

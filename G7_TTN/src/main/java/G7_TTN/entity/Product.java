@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "G7_product")
@@ -33,4 +34,10 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "idcategory")
     private Category category;
+
+    @OneToOne(mappedBy = "product")
+    private ProductSale sale;
+
+    @OneToMany(mappedBy = "product")
+    private List<Product_images> images;
 }

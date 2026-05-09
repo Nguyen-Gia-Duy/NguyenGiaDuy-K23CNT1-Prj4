@@ -1,31 +1,37 @@
 package G7_TTN.controller.admin;
 
-import G7_TTN.reponsitory.ProductRepository;
-import G7_TTN.reponsitory.UserReponsitory;
+import G7_TTN.reponsitory.CategoryRepository;
+import G7_TTN.service.ProductService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
 
-    private final ProductRepository productRepo;
-    private final UserReponsitory userRepo;
+    private final ProductService productService;
+    private final CategoryRepository categoryRepo;
 
-    public AdminController(ProductRepository productRepo,
-                           UserReponsitory userRepo) {
-        this.productRepo = productRepo;
-        this.userRepo = userRepo;
+    public AdminController(ProductService productService,
+                           CategoryRepository categoryRepo) {
+
+        this.productService = productService;
+        this.categoryRepo = categoryRepo;
     }
 
-    // Dashboard
+    // ================= DASHBOARD =================
     @GetMapping
     public String dashboard(Model model) {
 
-        model.addAttribute("totalUsers", userRepo.count());
-        model.addAttribute("totalProducts", productRepo.count());
+        model.addAttribute("totalProducts",
+                productService.count());
+
+        model.addAttribute("categories",
+                categoryRepo.findAll());
 
         return "admin/index";
     }
+
 }

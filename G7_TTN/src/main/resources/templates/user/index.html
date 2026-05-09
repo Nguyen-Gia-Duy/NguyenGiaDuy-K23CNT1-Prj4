@@ -6,37 +6,182 @@
     <meta charset="UTF-8">
     <title>Trang chủ | Thời Trang Nam</title>
 
+    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <style>
-        body { font-family: 'Poppins', sans-serif; background: #f5f5f5; }
-        .navbar { background: #111; }
-        .navbar-brand { font-weight: 600; color: #fff !important; }
-        .nav-link { color: #ddd !important; }
-        .nav-link:hover { color: #fff !important; }
-        .hero {
-            background: url('https://images.unsplash.com/photo-1516826957135-700dedea698c') center/cover;
-            height: 400px; display: flex; align-items: center;
-            color: white; padding-left: 50px;
+
+        body{
+            font-family:'Poppins',sans-serif;
+            background:#f5f5f5;
         }
-        .hero h1 { font-size: 50px; font-weight: bold; }
-        .product-card { transition: 0.3s; border-radius: 15px; }
-        .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+
+        /* NAVBAR */
+        .navbar{
+            background:linear-gradient(90deg,#111,#222);
         }
-        .price { color: red; font-weight: bold; }
+
+        .navbar-brand{
+            font-weight:700;
+            color:#fff !important;
+        }
+
+        .nav-link{
+            color:#ddd !important;
+            position:relative;
+            margin:0 5px;
+        }
+
+        .nav-link:hover{
+            color:#fff !important;
+        }
+
+        .nav-link::after{
+            content:'';
+            width:0;
+            height:2px;
+            background:#fff;
+            position:absolute;
+            bottom:0;
+            left:0;
+            transition:0.3s;
+        }
+
+        .nav-link:hover::after{
+            width:100%;
+        }
+
+        .dropdown-menu{
+            border-radius:12px;
+            border:none;
+        }
+
+        /* HERO */
+        .hero{
+            background:
+                    linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),
+                    url('https://images.unsplash.com/photo-1516826957135-700dedea698c')
+                    center/cover;
+
+            height:520px;
+            display:flex;
+            align-items:center;
+            color:white;
+        }
+
+        .hero-content{
+            max-width:600px;
+        }
+
+        .hero h1{
+            font-size:60px;
+            font-weight:700;
+        }
+
+        .hero p{
+            font-size:18px;
+        }
+
+        /* CARD */
+        .product-card{
+            transition:0.3s;
+            border:none;
+            border-radius:18px;
+            overflow:hidden;
+            background:#fff;
+        }
+
+        .product-card:hover{
+            transform:translateY(-10px);
+            box-shadow:0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .product-img{
+            height:260px;
+            object-fit:cover;
+        }
+
+        .price{
+            color:red;
+            font-weight:bold;
+            font-size:18px;
+        }
+
+        /* POLICY */
+        .policy-box{
+            background:#fff;
+            border-radius:15px;
+            padding:25px;
+            transition:0.3s;
+            height:100%;
+        }
+
+        .policy-box:hover{
+            transform:translateY(-5px);
+            box-shadow:0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .policy-icon{
+            font-size:35px;
+            color:#111;
+            margin-bottom:10px;
+        }
+
+        /* BANNER */
+        .sale-banner{
+            background:linear-gradient(90deg,#111,#444);
+            border-radius:20px;
+            color:#fff;
+            padding:50px;
+        }
+
+        /* FOOTER */
+        .footer{
+            background:#111;
+            color:#ddd;
+            margin-top:70px;
+        }
+
+        .footer a{
+            color:#bbb;
+            text-decoration:none;
+        }
+
+        .footer a:hover{
+            color:#fff;
+        }
+
+        .footer-title{
+            color:#fff;
+            font-weight:600;
+            margin-bottom:15px;
+        }
+
+        .social i{
+            font-size:22px;
+            margin-right:10px;
+        }
+
     </style>
 </head>
 
 <body>
 
 <!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg navbar-dark">
+<nav class="navbar navbar-expand-lg navbar-dark shadow-sm">
     <div class="container">
 
-        <a class="navbar-brand" href="/user">G7 Fashion</a>
+        <!-- LOGO -->
+        <a class="navbar-brand fs-3" href="/user">
+            🛍 G7 Fashion
+        </a>
 
         <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
             <span class="navbar-toggler-icon"></span>
@@ -44,20 +189,40 @@
 
         <div id="nav" class="collapse navbar-collapse">
 
-            <!-- LEFT -->
-            <ul class="navbar-nav me-auto">
+            <!-- MENU -->
+            <ul class="navbar-nav me-auto align-items-lg-center">
+
                 <li class="nav-item">
-                    <a class="nav-link" href="/user">Trang chủ</a>
+                    <a class="nav-link active" href="/user">Trang chủ</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/products">Sản phẩm</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-warning fw-bold" href="/sale">
+                        🔥 Sale
+                    </a>
                 </li>
 
                 <!-- DANH MỤC -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="/products" data-bs-toggle="dropdown">
-                        Danh mục Sản phẩm
+
+                    <a class="nav-link dropdown-toggle"
+                       href="#"
+                       data-bs-toggle="dropdown">
+
+                        Danh mục
                     </a>
 
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/products">Tất cả</a></li>
+                    <ul class="dropdown-menu shadow">
+
+                        <li>
+                            <a class="dropdown-item" href="/products">
+                                Tất cả sản phẩm
+                            </a>
+                        </li>
 
                         <li th:each="c : ${categories}">
                             <a class="dropdown-item"
@@ -65,82 +230,326 @@
                                th:text="${c.name}">
                             </a>
                         </li>
+
                     </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/news">Tin tức</a>
                 </li>
 
                 <!-- ADMIN -->
                 <li class="nav-item" sec:authorize="hasRole('ADMIN')">
-                    <a href="/admin" class="nav-link text-warning">⚙ Admin</a>
+                    <a href="/admin" class="nav-link text-warning fw-bold">
+                        ⚙ Admin
+                    </a>
                 </li>
+
             </ul>
+
+            <!-- SEARCH -->
+            <form class="d-flex mx-lg-3 my-2 my-lg-0"
+                  action="/products"
+                  method="get"
+                  style="min-width:300px;">
+
+                <input class="form-control rounded-pill me-2"
+                       type="search"
+                       name="keyword"
+                       placeholder="Tìm kiếm sản phẩm...">
+
+                <button class="btn btn-outline-light rounded-pill">
+                    <i class="bi bi-search"></i>
+                </button>
+            </form>
 
             <!-- RIGHT -->
             <ul class="navbar-nav align-items-center">
 
-                <!-- USER NAME -->
-                <li class="nav-item me-2" sec:authorize="isAuthenticated()">
-                    <span class="text-white">
-                        👋 <span sec:authentication="name"></span>
+                <!-- USER -->
+                <li class="nav-item me-2"
+                    sec:authorize="isAuthenticated()">
+
+                    <span class="text-white small">
+                        👋 Xin chào,
+                        <span sec:authentication="name"></span>
                     </span>
                 </li>
 
-                <!-- CART (CHỈ HIỆN KHI LOGIN) -->
-                <li class="nav-item" sec:authorize="isAuthenticated()">
-                    <a href="/cart" class="nav-link text-white">🛒</a>
+                <!-- CART -->
+                <li class="nav-item"
+                    sec:authorize="isAuthenticated()">
+
+                    <a href="/cart"
+                       class="nav-link position-relative">
+
+                        🛒
+
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            0
+                        </span>
+
+                    </a>
                 </li>
 
                 <!-- LOGIN -->
-                <li class="nav-item" sec:authorize="!isAuthenticated()">
-                    <a href="/login" class="btn btn-outline-light btn-sm ms-2">Đăng nhập</a>
+                <li class="nav-item"
+                    sec:authorize="!isAuthenticated()">
+
+                    <a href="/login"
+                       class="btn btn-outline-light btn-sm ms-2 rounded-pill">
+
+                        Đăng nhập
+                    </a>
                 </li>
 
                 <!-- LOGOUT -->
-                <li class="nav-item" sec:authorize="isAuthenticated()">
-                    <a href="/logout" class="btn btn-danger btn-sm ms-2">Đăng xuất</a>
+                <li class="nav-item"
+                    sec:authorize="isAuthenticated()">
+
+                    <a href="/logout"
+                       class="btn btn-danger btn-sm ms-2 rounded-pill">
+
+                        Đăng xuất
+                    </a>
                 </li>
 
             </ul>
+
         </div>
     </div>
 </nav>
 
 <!-- HERO -->
-<div class="hero">
-    <div>
-        <h1>Thời Trang Nam</h1>
-        <p>Phong cách - Đẳng cấp - Hiện đại</p>
-        <a href="/products" class="btn btn-light mt-3">Mua ngay</a>
+<section class="hero">
+    <div class="container">
+
+        <div class="hero-content">
+
+            <h1>Thời Trang Nam Cao Cấp</h1>
+
+            <p class="mt-3 mb-4">
+                Khám phá phong cách hiện đại,
+                lịch lãm và đẳng cấp dành cho nam giới.
+            </p>
+
+            <a href="/products" class="btn btn-light btn-lg rounded-pill px-4">
+                Mua ngay
+            </a>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- POLICY -->
+<div class="container mt-5">
+
+    <div class="row g-4">
+
+        <div class="col-md-3">
+            <div class="policy-box text-center">
+
+                <div class="policy-icon">
+                    <i class="bi bi-truck"></i>
+                </div>
+
+                <h6>Miễn phí vận chuyển</h6>
+
+                <small>
+                    Áp dụng cho đơn hàng từ 500.000 VNĐ
+                </small>
+
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="policy-box text-center">
+
+                <div class="policy-icon">
+                    <i class="bi bi-arrow-repeat"></i>
+                </div>
+
+                <h6>Đổi trả dễ dàng</h6>
+
+                <small>
+                    Hỗ trợ đổi trả trong 7 ngày
+                </small>
+
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="policy-box text-center">
+
+                <div class="policy-icon">
+                    <i class="bi bi-headset"></i>
+                </div>
+
+                <h6>Hỗ trợ 24/7</h6>
+
+                <small>
+                    Hotline: 0964 942 121
+                </small>
+
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="policy-box text-center">
+
+                <div class="policy-icon">
+                    <i class="bi bi-credit-card"></i>
+                </div>
+
+                <h6>Thanh toán đa dạng</h6>
+
+                <small>
+                    COD - Visa - Chuyển khoản
+                </small>
+
+            </div>
+        </div>
+
     </div>
 </div>
 
-<!-- SẢN PHẨM -->
+<!-- PRODUCT -->
 <div class="container mt-5">
-    <h3 class="mb-4">🔥 Sản phẩm nổi bật</h3>
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <h3>🔥 Sản phẩm nổi bật</h3>
+
+        <a href="/products" class="btn btn-dark rounded-pill">
+            Xem tất cả
+        </a>
+
+    </div>
 
     <div class="row">
-        <div class="col-md-3 col-sm-6 mb-4" th:each="p : ${products}">
-            <div class="card product-card">
-                <img th:src="@{'/images/' + ${p.image}}" class="card-img-top" style="height:250px; object-fit:cover;">
 
-                <div class="card-body text-center">
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4"
+             th:each="p : ${products}">
+
+            <div class="card product-card h-100">
+
+                <img th:if="${p.images != null and !p.images.isEmpty()}"
+                     th:src="@{/images/{img}(img=${p.images[0].urlimg})}"
+                     class="card-img-top product-img">
+                <div class="card-body text-center d-flex flex-column">
+
                     <h6 th:text="${p.name}"></h6>
 
-                    <p class="price"
+                    <p class="price mt-2"
                        th:text="${#numbers.formatDecimal(p.price, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'">
                     </p>
 
-                    <a th:href="@{'/product/' + ${p.id}}" class="btn btn-dark btn-sm">Xem chi tiết</a>
+                    <div class="mt-auto">
 
-                    <!-- ADD CART CHỈ KHI LOGIN -->
-                    <a th:href="@{'/cart/add/' + ${p.id}}"
-                       class="btn btn-outline-danger btn-sm"
-                       sec:authorize="isAuthenticated()">Thêm</a>
+                        <a th:href="@{'/product/' + ${p.id}}"
+                           class="btn btn-dark btn-sm rounded-pill">
+
+                            Xem chi tiết
+                        </a>
+
+                        <a th:href="@{'/cart/add/' + ${p.id}}"
+                           class="btn btn-outline-danger btn-sm rounded-pill"
+                           sec:authorize="isAuthenticated()">
+
+                            Thêm
+                        </a>
+
+                    </div>
+
                 </div>
             </div>
+
         </div>
+
     </div>
 </div>
 
+<!-- BANNER -->
+<div class="container mt-5">
+
+    <div class="sale-banner text-center">
+
+        <h2 class="fw-bold">🔥 SALE UP TO 50%</h2>
+
+        <p class="mt-3">
+            Ưu đãi cực lớn cho toàn bộ sản phẩm thời trang nam cao cấp.
+        </p>
+
+        <a href="/sale" class="btn btn-light btn-lg rounded-pill mt-2">
+            Mua ngay
+        </a>
+
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer mt-5 pt-5 pb-3">
+
+    <div class="container">
+
+        <div class="row">
+
+            <!-- SHOP -->
+            <div class="col-md-4 mb-4">
+
+                <h5 class="footer-title">🛍 G7 Fashion</h5>
+
+                <p>
+                    Chuyên cung cấp thời trang nam cao cấp,
+                    hiện đại và trẻ trung.
+                </p>
+
+                <div class="social mt-3">
+                    <a href="#"><i class="bi bi-facebook"></i></a>
+                    <a href="#"><i class="bi bi-instagram"></i></a>
+                    <a href="#"><i class="bi bi-tiktok"></i></a>
+                    <a href="#"><i class="bi bi-youtube"></i></a>
+                </div>
+
+            </div>
+
+            <!-- CONTACT -->
+            <div class="col-md-4 mb-4">
+
+                <h5 class="footer-title">📞 Liên hệ</h5>
+
+                <p>Hotline: 0964 942 121</p>
+                <p>Email: g7fashion@gmail.com</p>
+                <p>Địa chỉ: Hà Nội, Việt Nam</p>
+
+            </div>
+
+            <!-- PAYMENT -->
+            <div class="col-md-4 mb-4">
+
+                <h5 class="footer-title">💳 Thanh toán</h5>
+
+                <p>✔ Thanh toán khi nhận hàng (COD)</p>
+                <p>✔ Visa / Mastercard</p>
+                <p>✔ Chuyển khoản ngân hàng</p>
+
+            </div>
+
+        </div>
+
+        <hr class="border-secondary">
+
+        <div class="text-center">
+            © 2026 G7 Fashion - All Rights Reserved
+        </div>
+
+    </div>
+
+</footer>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
