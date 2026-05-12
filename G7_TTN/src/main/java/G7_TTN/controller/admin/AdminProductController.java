@@ -5,6 +5,7 @@ import G7_TTN.entity.ProductSale;
 import G7_TTN.reponsitory.CategoryRepository;
 import G7_TTN.reponsitory.ProductRepository;
 import G7_TTN.reponsitory.ProductSaleRepository;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,12 +20,16 @@ import java.util.UUID;
 public class AdminProductController {
 
     private final ProductRepository productRepo;
+
     private final CategoryRepository categoryRepo;
+
     private final ProductSaleRepository saleRepo;
 
-    public AdminProductController(ProductRepository productRepo,
-                                  CategoryRepository categoryRepo,
-                                  ProductSaleRepository saleRepo) {
+    public AdminProductController(
+            ProductRepository productRepo,
+            CategoryRepository categoryRepo,
+            ProductSaleRepository saleRepo
+    ) {
 
         this.productRepo = productRepo;
         this.categoryRepo = categoryRepo;
@@ -32,31 +37,41 @@ public class AdminProductController {
     }
 
     // ================= LIST =================
+
     @GetMapping
     public String index(Model model) {
 
-        model.addAttribute("products",
-                productRepo.findAll());
+        model.addAttribute(
+                "products",
+                productRepo.findAll()
+        );
 
         return "admin/product/index";
     }
 
     // ================= CREATE =================
+
     @GetMapping("/create")
     public String create(Model model) {
 
-        model.addAttribute("product",
-                new Product());
+        model.addAttribute(
+                "product",
+                new Product()
+        );
 
-        model.addAttribute("categories",
-                categoryRepo.findAll());
+        model.addAttribute(
+                "categories",
+                categoryRepo.findAll()
+        );
 
         return "admin/product/create";
     }
 
     // ================= STORE =================
+
     @PostMapping("/store")
     public String store(
+
             @ModelAttribute Product product,
 
             @RequestParam("file")
@@ -64,6 +79,7 @@ public class AdminProductController {
 
             @RequestParam(required = false)
             Integer discountpercent
+
     ) throws IOException {
 
         // ================= UPLOAD IMAGE =================
@@ -72,25 +88,46 @@ public class AdminProductController {
 
             String uploadDir =
                     System.getProperty("user.dir")
-                            + "/src/main/resources/static/images/";
+                            + File.separator
+                            + "uploads"
+                            + File.separator;
 
             File dir = new File(uploadDir);
 
+            // CREATE FOLDER
             if (!dir.exists()) {
 
                 dir.mkdirs();
             }
 
+            // ORIGINAL NAME
+            String originalName =
+                    file.getOriginalFilename();
+
+            if (originalName == null
+                    || originalName.isBlank()) {
+
+                originalName = "image.jpg";
+            }
+
+            // NEW FILE NAME
             String fileName =
                     UUID.randomUUID()
                             + "_"
-                            + file.getOriginalFilename();
+                            + originalName;
 
-            file.transferTo(
-                    new File(uploadDir + fileName));
+            // DESTINATION
+            File destination =
+                    new File(uploadDir + fileName);
 
+            // SAVE FILE
+            file.transferTo(destination);
+
+            // SAVE DB
             product.setImage(fileName);
         }
+
+        // ================= SAVE PRODUCT =================
 
         Product saved =
                 productRepo.save(product);
@@ -106,7 +143,10 @@ public class AdminProductController {
             sale.setProduct(saved);
 
             sale.setDiscountpercent(
-                    discountpercent);
+                    discountpercent
+            );
+
+            sale.setIsactive(1);
 
             saleRepo.save(sale);
         }
@@ -115,26 +155,35 @@ public class AdminProductController {
     }
 
     // ================= EDIT =================
+
     @GetMapping("/edit/{id}")
-    public String edit(@PathVariable Long id,
-                       Model model) {
+    public String edit(
+            @PathVariable Long id,
+            Model model
+    ) {
 
         Product product =
                 productRepo.findById(id)
                         .orElse(null);
 
-        model.addAttribute("product",
-                product);
+        model.addAttribute(
+                "product",
+                product
+        );
 
-        model.addAttribute("categories",
-                categoryRepo.findAll());
+        model.addAttribute(
+                "categories",
+                categoryRepo.findAll()
+        );
 
         return "admin/product/edit";
     }
 
     // ================= UPDATE =================
+
     @PostMapping("/update/{id}")
     public String update(
+
             @PathVariable Long id,
 
             @ModelAttribute Product product,
@@ -144,6 +193,7 @@ public class AdminProductController {
 
             @RequestParam(required = false)
             Integer discountpercent
+
     ) throws IOException {
 
         Product old =
@@ -152,25 +202,39 @@ public class AdminProductController {
 
         if (old != null) {
 
-            old.setName(product.getName());
+            // ================= UPDATE INFO =================
+
+            old.setName(
+                    product.getName()
+            );
 
             old.setDescription(
-                    product.getDescription());
+                    product.getDescription()
+            );
 
-            old.setBrand(product.getBrand());
+            old.setBrand(
+                    product.getBrand()
+            );
 
             old.setMaterial(
-                    product.getMaterial());
+                    product.getMaterial()
+            );
 
-            old.setPrice(product.getPrice());
+            old.setPrice(
+                    product.getPrice()
+            );
 
             old.setQuantity(
-                    product.getQuantity());
+                    product.getQuantity()
+            );
 
-            old.setSlug(product.getSlug());
+            old.setSlug(
+                    product.getSlug()
+            );
 
             old.setCategory(
-                    product.getCategory());
+                    product.getCategory()
+            );
 
             // ================= UPDATE IMAGE =================
 
@@ -178,7 +242,9 @@ public class AdminProductController {
 
                 String uploadDir =
                         System.getProperty("user.dir")
-                                + "/src/main/resources/static/images/";
+                                + File.separator
+                                + "uploads"
+                                + File.separator;
 
                 File dir = new File(uploadDir);
 
@@ -187,20 +253,46 @@ public class AdminProductController {
                     dir.mkdirs();
                 }
 
+                // DELETE OLD IMAGE
+                if (old.getImage() != null) {
+
+                    File oldFile =
+                            new File(uploadDir
+                                    + old.getImage());
+
+                    if (oldFile.exists()) {
+
+                        oldFile.delete();
+                    }
+                }
+
+                // NEW IMAGE
+                String originalName =
+                        file.getOriginalFilename();
+
+                if (originalName == null
+                        || originalName.isBlank()) {
+
+                    originalName = "image.jpg";
+                }
+
                 String fileName =
                         UUID.randomUUID()
                                 + "_"
-                                + file.getOriginalFilename();
+                                + originalName;
 
-                file.transferTo(
-                        new File(uploadDir + fileName));
+                File destination =
+                        new File(uploadDir + fileName);
+
+                file.transferTo(destination);
 
                 old.setImage(fileName);
             }
 
+            // SAVE PRODUCT
             productRepo.save(old);
 
-            // ================= SALE =================
+            // ================= UPDATE SALE =================
 
             ProductSale sale =
                     old.getSale();
@@ -216,7 +308,10 @@ public class AdminProductController {
                 }
 
                 sale.setDiscountpercent(
-                        discountpercent);
+                        discountpercent
+                );
+
+                sale.setIsactive(1);
 
                 saleRepo.save(sale);
 
@@ -232,8 +327,7 @@ public class AdminProductController {
         return "redirect:/admin/products";
     }
 
-    // ================= DELETE =================
-    @GetMapping("/delete/{id}")
+    @PostMapping("/delete/{id}")
     public String delete(@PathVariable Long id) {
 
         Product product =
@@ -242,10 +336,16 @@ public class AdminProductController {
 
         if (product != null) {
 
+            // GỠ LIÊN KẾT SALE
             if (product.getSale() != null) {
 
-                saleRepo.delete(
-                        product.getSale());
+                ProductSale sale = product.getSale();
+
+                product.setSale(null);
+
+                productRepo.save(product);
+
+                saleRepo.delete(sale);
             }
 
             productRepo.delete(product);
@@ -253,5 +353,4 @@ public class AdminProductController {
 
         return "redirect:/admin/products";
     }
-
 }

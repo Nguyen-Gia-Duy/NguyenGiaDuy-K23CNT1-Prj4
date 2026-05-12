@@ -136,17 +136,29 @@
             </div>
         </div>
 
+        <!-- FIX ĐƠN HÀNG -->
         <div class="col-md-3 mb-4">
             <div class="card p-3 text-center">
-                <h4>0</h4>
+
+                <h4 th:text="${totalOrders != null ? totalOrders : 0}">
+                    0
+                </h4>
+
                 <p>Đơn hàng</p>
+
             </div>
         </div>
 
+        <!-- FIX DOANH THU -->
         <div class="col-md-3 mb-4">
             <div class="card p-3 text-center">
-                <h4>0</h4>
+
+                <h4 th:text="${totalRevenue != null ? totalRevenue : 0}">
+                    0
+                </h4>
+
                 <p>Doanh thu</p>
+
             </div>
         </div>
 
@@ -154,13 +166,22 @@
 
     <!-- QUICK ACTION -->
     <div class="mt-4">
-        <a href="/admin/products" class="btn btn-dark">
+
+        <a href="/admin/products"
+           class="btn btn-dark">
+
             📦 Quản lý sản phẩm
+
         </a>
 
-        <a href="/admin/products/add" class="btn btn-success">
+        <!-- FIX LINK -->
+        <a href="/admin/products/create"
+           class="btn btn-success">
+
             ➕ Thêm sản phẩm
+
         </a>
+
     </div>
 
 </div>

@@ -37,7 +37,4 @@ public class Product {
 
     @OneToOne(mappedBy = "product")
     private ProductSale sale;
-
-    @OneToMany(mappedBy = "product")
-    private List<Product_images> images;
-}
+    }

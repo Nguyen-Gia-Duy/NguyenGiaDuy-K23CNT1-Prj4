@@ -1,92 +1,648 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
+
     <meta charset="UTF-8">
     <title>SALE | G7 Fashion</title>
 
+    <!-- BOOTSTRAP -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
           rel="stylesheet">
 
+    <!-- FONT -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- ICON -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
     <style>
 
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
         body{
+            font-family:'Poppins',sans-serif;
             background:#f5f5f5;
+            overflow-x:hidden;
+        }
+
+        a{
+            text-decoration:none;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar{
+            background:linear-gradient(90deg,#111,#222);
+            padding:14px 0;
+        }
+
+        .navbar-brand{
+            font-size:30px;
+            font-weight:700;
+            color:#fff !important;
+        }
+
+        .nav-link{
+            color:#ddd !important;
+            margin:0 8px;
+            position:relative;
+            font-weight:500;
+        }
+
+        .nav-link:hover{
+            color:#fff !important;
+        }
+
+        .nav-link::after{
+            content:'';
+            position:absolute;
+            left:0;
+            bottom:-3px;
+            width:0;
+            height:2px;
+            background:#fff;
+            transition:0.3s;
+        }
+
+        .nav-link:hover::after{
+            width:100%;
+        }
+
+        /* ================= HERO ================= */
+
+        .sale-banner{
+
+            height:430px;
+
+            background:
+                    linear-gradient(rgba(0,0,0,0.55),
+                    rgba(0,0,0,0.55)),
+                    url('/images/sale.jpg');
+
+            background-size:cover;
+            background-position:center;
+
+            display:flex;
+            align-items:center;
+            justify-content:center;
+
+            text-align:center;
+            color:#fff;
+        }
+
+        .sale-banner h1{
+            font-size:70px;
+            font-weight:700;
+        }
+
+        .sale-banner p{
+            font-size:20px;
+            color:#eee;
+            margin-top:15px;
+        }
+
+        /* ================= TOP INFO ================= */
+
+        .top-info{
+            margin-top:-50px;
+            position:relative;
+            z-index:10;
+        }
+
+        .info-box{
+            background:#fff;
+            padding:25px;
+            border-radius:25px;
+            text-align:center;
+            box-shadow:0 10px 30px rgba(0,0,0,0.08);
+            transition:0.3s;
+            height:100%;
+        }
+
+        .info-box:hover{
+            transform:translateY(-5px);
+        }
+
+        .info-icon{
+            width:70px;
+            height:70px;
+
+            background:#111;
+            color:#fff;
+
+            border-radius:50%;
+
+            display:flex;
+            align-items:center;
+            justify-content:center;
+
+            margin:auto;
+            margin-bottom:15px;
+
+            font-size:28px;
+        }
+
+        /* ================= PRODUCT ================= */
+
+        .section-title{
+            font-size:38px;
+            font-weight:700;
+            margin-bottom:40px;
         }
 
         .product-card{
             border:none;
-            border-radius:15px;
+            border-radius:25px;
             overflow:hidden;
-            transition:0.3s;
+            background:#fff;
+            position:relative;
+            transition:0.4s;
+            height:100%;
+            box-shadow:0 8px 25px rgba(0,0,0,0.06);
         }
 
         .product-card:hover{
             transform:translateY(-10px);
-            box-shadow:0 10px 25px rgba(0,0,0,0.15);
+            box-shadow:0 18px 40px rgba(0,0,0,0.15);
+        }
+
+        .product-img-box{
+            overflow:hidden;
+            position:relative;
         }
 
         .product-img{
-            height:260px;
+            width:100%;
+            height:320px;
             object-fit:cover;
+            transition:0.5s;
         }
 
-        .old-price{
-            text-decoration:line-through;
-            color:gray;
-        }
-
-        .new-price{
-            color:red;
-            font-size:22px;
-            font-weight:bold;
+        .product-card:hover .product-img{
+            transform:scale(1.08);
         }
 
         .sale-badge{
             position:absolute;
-            top:10px;
-            left:10px;
-            background:red;
+            top:15px;
+            left:15px;
+
+            background:#dc3545;
             color:#fff;
-            padding:5px 10px;
-            border-radius:10px;
+
+            padding:8px 16px;
+            border-radius:30px;
+
+            font-size:14px;
+            font-weight:600;
+
+            z-index:10;
+        }
+
+        .hot-badge{
+            position:absolute;
+            top:15px;
+            right:15px;
+
+            background:#111;
+            color:#fff;
+
+            padding:8px 14px;
+            border-radius:30px;
+
+            font-size:12px;
+            font-weight:600;
+
+            z-index:10;
+        }
+
+        .product-action{
+            position:absolute;
+            bottom:15px;
+            left:50%;
+            transform:translateX(-50%);
+
+            opacity:0;
+            transition:0.3s;
+        }
+
+        .product-card:hover .product-action{
+            opacity:1;
+        }
+
+        .product-body{
+            padding:25px;
+            text-align:center;
+        }
+
+        .product-name{
+            font-size:18px;
+            font-weight:600;
+            min-height:54px;
+        }
+
+        .brand{
+            color:#888;
+            font-size:14px;
+        }
+
+        .old-price{
+            color:#999;
+            text-decoration:line-through;
+            font-size:15px;
+            margin-top:10px;
+        }
+
+        .new-price{
+            color:#dc3545;
+            font-size:28px;
+            font-weight:700;
+        }
+
+        .save-price{
+            display:inline-block;
+            margin-top:10px;
+
+            background:#fff3cd;
+            color:#856404;
+
+            padding:6px 14px;
+            border-radius:30px;
+
             font-size:13px;
+            font-weight:600;
+        }
+
+        /* ================= CTA ================= */
+
+        .cta-banner{
+            background:
+                    linear-gradient(90deg,#111,#333);
+
+            border-radius:30px;
+            padding:60px;
+            color:#fff;
+            overflow:hidden;
+        }
+
+        /* ================= FOOTER ================= */
+
+        .footer{
+            background:#111;
+            color:#ccc;
+            margin-top:80px;
+            padding-top:60px;
+        }
+
+        .footer-title{
+            color:#fff;
+            font-weight:600;
+            margin-bottom:20px;
+        }
+
+        .footer a{
+            color:#bbb;
+            display:block;
+            margin-bottom:12px;
+            transition:0.3s;
+        }
+
+        .footer a:hover{
+            color:#fff;
+            transform:translateX(5px);
+        }
+
+        .social-icons a{
+            width:42px;
+            height:42px;
+
+            background:#222;
+            border-radius:50%;
+
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+
+            margin-right:10px;
+
+            color:#fff;
+            font-size:18px;
+        }
+
+        .social-icons a:hover{
+            background:#dc3545;
+        }
+
+        .payment-logo img{
+            width:60px;
+            margin-right:10px;
+            margin-top:10px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media(max-width:768px){
+
+            .sale-banner{
+                height:320px;
+                padding:20px;
+            }
+
+            .sale-banner h1{
+                font-size:42px;
+            }
+
+            .cta-banner{
+                padding:35px;
+                text-align:center;
+            }
         }
 
     </style>
+
 </head>
 
 <body>
 
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top shadow">
+
+    <div class="container">
+
+        <a class="navbar-brand"
+           href="/user">
+
+            🛍 G7 Fashion
+
+        </a>
+
+        <button class="navbar-toggler"
+                data-bs-toggle="collapse"
+                data-bs-target="#nav">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+        <div class="collapse navbar-collapse"
+             id="nav">
+
+            <!-- MENU -->
+            <ul class="navbar-nav me-auto ms-4">
+
+                <li class="nav-item">
+                    <a href="/user"
+                       class="nav-link">
+
+                        Trang chủ
+
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/products"
+                       class="nav-link">
+
+                        Sản phẩm
+
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/sale"
+                       class="nav-link active text-warning fw-bold">
+
+                        🔥 Sale
+
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/news"
+                       class="nav-link">
+
+                        Tin tức
+
+                    </a>
+                </li>
+
+            </ul>
+
+            <!-- SEARCH -->
+            <form class="d-flex me-3"
+                  action="/products"
+                  method="get">
+
+                <input type="search"
+                       name="keyword"
+                       class="form-control rounded-pill me-2"
+                       placeholder="Tìm sản phẩm sale...">
+
+                <button class="btn btn-light rounded-pill">
+                    <i class="fa fa-search"></i>
+                </button>
+
+            </form>
+
+            <!-- RIGHT -->
+            <ul class="navbar-nav align-items-center">
+
+                <li class="nav-item me-3"
+                    sec:authorize="isAuthenticated()">
+
+                    <span class="text-white">
+                        👋 <span sec:authentication="name"></span>
+                    </span>
+
+                </li>
+
+                <li class="nav-item">
+
+                    <a href="/cart"
+                       class="btn btn-danger rounded-pill">
+
+                        <i class="fa fa-cart-shopping"></i>
+
+                    </a>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
+
+<!-- ================= HERO ================= -->
+
+<section class="sale-banner">
+
+    <div>
+
+        <h1>MEGA SALE 2026</h1>
+
+        <p>
+            Giảm giá cực sốc lên đến 50% cho toàn bộ sản phẩm
+        </p>
+
+        <a href="/products"
+           class="btn btn-light btn-lg rounded-pill px-5 mt-4">
+
+            Mua ngay
+
+        </a>
+
+    </div>
+
+</section>
+
+<!-- ================= INFO ================= -->
+
+<div class="container top-info">
+
+    <div class="row g-4">
+
+        <div class="col-md-4">
+
+            <div class="info-box">
+
+                <div class="info-icon">
+                    <i class="fa fa-fire"></i>
+                </div>
+
+                <h5>Sale Hot Mỗi Ngày</h5>
+
+                <small>
+                    Hàng ngàn sản phẩm giảm giá cực mạnh
+                </small>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="info-box">
+
+                <div class="info-icon">
+                    <i class="fa fa-truck"></i>
+                </div>
+
+                <h5>Free Shipping</h5>
+
+                <small>
+                    Miễn phí giao hàng toàn quốc
+                </small>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="info-box">
+
+                <div class="info-icon">
+                    <i class="fa fa-shield"></i>
+                </div>
+
+                <h5>Bảo Hành Đổi Trả</h5>
+
+                <small>
+                    Hỗ trợ đổi trả trong 7 ngày
+                </small>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ================= PRODUCT ================= -->
+
 <div class="container mt-5">
 
-    <h2 class="mb-4">
-        🔥 Sản phẩm SALE
-    </h2>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <h2 class="section-title">
+            🔥 Sản phẩm đang giảm giá
+        </h2>
+
+        <span class="text-muted">
+            Tổng:
+            <strong th:text="${#lists.size(products)}"></strong>
+            sản phẩm
+        </span>
+
+    </div>
 
     <div class="row">
 
-        <div class="col-md-3 mb-4"
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4"
              th:each="p : ${products}">
 
-            <div class="card product-card position-relative">
-
-                <!-- BADGE -->
-                <div class="sale-badge">
-                    -
-                    <span th:text="${p.sale.discountpercent}">
-                    </span>%
-                </div>
+            <div class="card product-card">
 
                 <!-- IMAGE -->
-                <img th:src="@{'/images/' + ${p.image}}"
-                     class="card-img-top product-img">
+                <div class="product-img-box">
 
-                <div class="card-body text-center">
+                    <!-- SALE -->
+                    <div class="sale-badge">
+
+                        -<span th:text="${p.sale.discountpercent}">
+                        </span>%
+
+                    </div>
+
+                    <!-- HOT -->
+                    <div class="hot-badge">
+                        HOT
+                    </div>
+
+                    <!-- IMAGE -->
+                    <img th:src="@{/images/{img}(img=${p.image})}"
+                         class="product-img"
+                         th:alt="${p.name}">
+
+                    <!-- ACTION -->
+                    <div class="product-action">
+
+                        <a th:href="@{'/product/' + ${p.id}}"
+                           class="btn btn-light rounded-pill px-4">
+
+                            Xem chi tiết
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <!-- BODY -->
+                <div class="product-body">
 
                     <!-- NAME -->
-                    <h6 th:text="${p.name}">
-                    </h6>
+                    <div class="product-name"
+                         th:text="${p.name}">
+                    </div>
+
+                    <!-- BRAND -->
+                    <div class="brand mt-1"
+                         th:text="${p.brand}">
+                    </div>
 
                     <!-- OLD PRICE -->
                     <div class="old-price">
@@ -118,23 +674,43 @@
 
                     </div>
 
-                    <div class="mt-3">
+                    <!-- SAVE -->
+                    <div class="save-price">
+
+                        Tiết kiệm:
+                        <span th:text="${#numbers.formatDecimal(
+                        p.price * p.sale.discountpercent / 100,
+                        0,
+                        'COMMA',
+                        0,
+                        'POINT')}">
+                        </span>
+
+                        VNĐ
+
+                    </div>
+
+                    <!-- BUTTON -->
+                    <div class="mt-4 d-flex gap-2">
 
                         <a th:href="@{'/product/' + ${p.id}}"
-                           class="btn btn-dark btn-sm">
+                           class="btn btn-dark rounded-pill w-50">
 
                             Xem
+
                         </a>
 
                         <a th:href="@{'/cart/add/' + ${p.id}}"
-                           class="btn btn-danger btn-sm">
+                           class="btn btn-danger rounded-pill w-50">
 
                             Thêm
+
                         </a>
 
                     </div>
 
                 </div>
+
             </div>
 
         </div>
@@ -142,6 +718,130 @@
     </div>
 
 </div>
+
+<!-- ================= CTA ================= -->
+
+<div class="container mt-5">
+
+    <div class="cta-banner text-center">
+
+        <h2 class="fw-bold">
+            ⚡ Ưu đãi chỉ có hôm nay
+        </h2>
+
+        <p class="mt-3 mb-4">
+
+            Nhanh tay săn sale để nhận những ưu đãi tốt nhất
+            dành cho thời trang nam cao cấp.
+
+        </p>
+
+        <a href="/products"
+           class="btn btn-light btn-lg rounded-pill px-5">
+
+            Khám phá ngay
+
+        </a>
+
+    </div>
+
+</div>
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+    <div class="container">
+
+        <div class="row">
+
+            <!-- ABOUT -->
+            <div class="col-md-4 mb-4">
+
+                <h5 class="footer-title">
+                    🛍 G7 Fashion
+                </h5>
+
+                <p>
+                    Thương hiệu thời trang nam hiện đại,
+                    trẻ trung và cao cấp tại Việt Nam.
+                </p>
+
+                <div class="social-icons mt-4">
+
+                    <a href="#">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+
+                    <a href="#">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+
+                    <a href="#">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+
+                    <a href="#">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- MENU -->
+            <div class="col-md-4 mb-4">
+
+                <h5 class="footer-title">
+                    📂 Danh mục
+                </h5>
+
+                <a href="/products">Tất cả sản phẩm</a>
+                <a href="/sale">Sale nổi bật</a>
+                <a href="/news">Tin tức thời trang</a>
+                <a href="/cart">Giỏ hàng</a>
+
+            </div>
+
+            <!-- CONTACT -->
+            <div class="col-md-4 mb-4">
+
+                <h5 class="footer-title">
+                    📞 Liên hệ
+                </h5>
+
+                <p>📍 Hà Nội, Việt Nam</p>
+                <p>📞 0964 942 121</p>
+                <p>✉ support@g7fashion.com</p>
+
+                <!-- PAYMENT -->
+                <div class="payment-logo">
+
+                    <img src="https://cdn-icons-png.flaticon.com/512/196/196578.png">
+
+                    <img src="https://cdn-icons-png.flaticon.com/512/349/349221.png">
+
+                    <img src="https://cdn-icons-png.flaticon.com/512/5968/5968299.png">
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <hr class="border-secondary">
+
+        <div class="text-center pb-3">
+
+            © 2026 G7 Fashion - All Rights Reserved
+
+        </div>
+
+    </div>
+
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

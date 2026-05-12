@@ -1,36 +1,222 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
 
     <meta charset="UTF-8">
-    <title>Cập nhật sản phẩm</title>
+    <title>Cập nhật sản phẩm | Admin</title>
 
+    <!-- BOOTSTRAP -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
           rel="stylesheet">
 
+    <!-- FONT -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap"
           rel="stylesheet">
 
+    <!-- ICON -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
     <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
 
         body{
             font-family:'Poppins',sans-serif;
-            background:#f5f5f5;
+            background:#f3f5f9;
         }
+
+        /* SIDEBAR */
+
+        .sidebar{
+            width:270px;
+            height:100vh;
+            position:fixed;
+            left:0;
+            top:0;
+            background:linear-gradient(180deg,#111,#1e1e1e);
+            padding:30px 20px;
+            color:#fff;
+            overflow-y:auto;
+        }
+
+        .logo{
+            font-size:28px;
+            font-weight:700;
+            margin-bottom:40px;
+            text-align:center;
+        }
+
+        .sidebar a{
+            display:flex;
+            align-items:center;
+            gap:12px;
+            text-decoration:none;
+            color:#ddd;
+            padding:14px 16px;
+            border-radius:14px;
+            transition:0.3s;
+            margin-bottom:10px;
+            font-size:15px;
+        }
+
+        .sidebar a:hover{
+            background:#2b2b2b;
+            color:#fff;
+            transform:translateX(5px);
+        }
+
+        .sidebar .active{
+            background:linear-gradient(135deg,#ff4d4d,#d60000);
+            color:#fff;
+        }
+
+        /* CONTENT */
+
+        .content{
+            margin-left:270px;
+            padding:40px;
+        }
+
+        /* CARD */
 
         .card-form{
             border:none;
-            border-radius:20px;
-            box-shadow:0 5px 20px rgba(0,0,0,0.08);
+            border-radius:28px;
+            overflow:hidden;
+            background:#fff;
+            box-shadow:0 10px 35px rgba(0,0,0,0.08);
+        }
+
+        .form-header{
+            background:linear-gradient(135deg,#111,#333);
+            color:#fff;
+            padding:35px;
+        }
+
+        .form-header h2{
+            font-weight:700;
+        }
+
+        .card-body{
+            padding:40px;
+        }
+
+        /* INPUT */
+
+        .form-label{
+            font-weight:600;
+            margin-bottom:8px;
+        }
+
+        .form-control,
+        .form-select{
+            border-radius:16px;
+            padding:14px 16px;
+            border:1px solid #ddd;
+        }
+
+        .form-control:focus,
+        .form-select:focus{
+            border-color:#111;
+            box-shadow:none;
+        }
+
+        textarea{
+            resize:none;
+        }
+
+        /* IMAGE */
+
+        .preview-box{
+            width:100%;
+            height:320px;
+            border:2px dashed #ddd;
+            border-radius:22px;
+            overflow:hidden;
+            position:relative;
+            background:#fafafa;
+            display:flex;
+            justify-content:center;
+            align-items:center;
         }
 
         .preview{
-            width:140px;
-            height:140px;
+            width:100%;
+            height:100%;
             object-fit:cover;
-            border-radius:15px;
-            margin-top:10px;
-            border:1px solid #ddd;
+        }
+
+        .image-label{
+            position:absolute;
+            top:15px;
+            left:15px;
+            background:#111;
+            color:#fff;
+            padding:7px 15px;
+            border-radius:30px;
+            font-size:13px;
+            z-index:10;
+        }
+
+        /* SALE */
+
+        .sale-box{
+            background:#fff5f5;
+            border:1px solid #ffd2d2;
+            border-radius:20px;
+            padding:25px;
+        }
+
+        /* BUTTON */
+
+        .btn-save{
+            background:#111;
+            color:#fff;
+            border:none;
+            padding:14px 30px;
+            border-radius:14px;
+            font-weight:600;
+        }
+
+        .btn-back{
+            background:#e9ecef;
+            color:#111;
+            border:none;
+            padding:14px 30px;
+            border-radius:14px;
+            text-decoration:none;
+            font-weight:600;
+        }
+
+        .btn-delete{
+            background:#dc3545;
+            color:#fff;
+            border:none;
+            padding:14px 30px;
+            border-radius:14px;
+            font-weight:600;
+        }
+
+        .btn-delete:hover{
+            background:#bb2d3b;
+        }
+
+        @media(max-width:992px){
+
+            .sidebar{
+                display:none;
+            }
+
+            .content{
+                margin-left:0;
+                padding:20px;
+            }
         }
 
     </style>
@@ -39,93 +225,112 @@
 
 <body>
 
-<div class="container py-5">
+<!-- SIDEBAR -->
+<div class="sidebar">
 
-    <div class="row justify-content-center">
+    <div class="logo">
+        ⚙ G7 ADMIN
+    </div>
 
-        <div class="col-lg-8">
+    <a href="/admin">
+        <i class="fa fa-chart-line"></i>
+        Dashboard
+    </a>
 
-            <div class="card card-form">
+    <a href="/admin/products" class="active">
+        <i class="fa fa-box"></i>
+        Sản phẩm
+    </a>
 
-                <div class="card-body p-5">
+    <a href="/admin/categories">
+        <i class="fa fa-list"></i>
+        Danh mục
+    </a>
 
-                    <h2 class="fw-bold mb-4">
-                        Cập nhật sản phẩm
-                    </h2>
+    <a href="/admin/orders">
+        <i class="fa fa-cart-shopping"></i>
+        Đơn hàng
+    </a>
 
-                    <form th:action="@{'/admin/products/update/' + ${product.id}}"
-                          method="post"
-                          enctype="multipart/form-data"
-                          th:object="${product}">
+</div>
 
-                        <!-- NAME -->
-                        <div class="mb-3">
+<!-- CONTENT -->
+<div class="content">
 
-                            <label class="fw-semibold">
+    <div class="card card-form">
+
+        <!-- HEADER -->
+        <div class="form-header">
+
+            <h2>
+                ✏️ Cập nhật sản phẩm
+            </h2>
+
+            <p>
+                Chỉnh sửa thông tin sản phẩm
+            </p>
+
+        </div>
+
+        <!-- BODY -->
+        <div class="card-body">
+
+            <form th:action="@{'/admin/products/update/' + ${product.id}}"
+                  method="post"
+                  enctype="multipart/form-data"
+                  th:object="${product}">
+
+                <div class="row g-5">
+
+                    <!-- LEFT -->
+                    <div class="col-lg-7">
+
+                        <div class="mb-4">
+
+                            <label class="form-label">
                                 Tên sản phẩm
                             </label>
 
                             <input type="text"
                                    th:field="*{name}"
-                                   class="form-control">
+                                   class="form-control"
+                                   required>
 
                         </div>
 
-                        <!-- IMAGE -->
-                        <div class="mb-3">
+                        <div class="row">
 
-                            <label class="fw-semibold">
-                                Ảnh
-                            </label>
+                            <div class="col-md-6 mb-4">
 
-                            <input type="file"
-                                   name="file"
-                                   class="form-control"
-                                   accept="image/*"
-                                   onchange="previewImage(event)">
+                                <label class="form-label">
+                                    Giá
+                                </label>
 
-                            <!-- ẢNH HIỆN TẠI -->
-                            <div class="mt-3"
-                                 th:if="${product.image != null}">
+                                <input type="number"
+                                       th:field="*{price}"
+                                       class="form-control"
+                                       required>
 
-                                <img th:src="@{'/images/' + ${product.image}}"
-                                     id="preview"
-                                     class="preview">
+                            </div>
+
+                            <div class="col-md-6 mb-4">
+
+                                <label class="form-label">
+                                    Số lượng
+                                </label>
+
+                                <input type="number"
+                                       th:field="*{quantity}"
+                                       class="form-control"
+                                       required>
 
                             </div>
 
                         </div>
 
-                        <!-- PRICE -->
-                        <div class="mb-3">
+                        <div class="mb-4">
 
-                            <label class="fw-semibold">
-                                Giá
-                            </label>
-
-                            <input type="number"
-                                   th:field="*{price}"
-                                   class="form-control">
-
-                        </div>
-
-                        <!-- QUANTITY -->
-                        <div class="mb-3">
-
-                            <label class="fw-semibold">
-                                Số lượng
-                            </label>
-
-                            <input type="number"
-                                   th:field="*{quantity}"
-                                   class="form-control">
-
-                        </div>
-
-                        <!-- BRAND -->
-                        <div class="mb-3">
-
-                            <label class="fw-semibold">
+                            <label class="form-label">
                                 Brand
                             </label>
 
@@ -135,10 +340,9 @@
 
                         </div>
 
-                        <!-- MATERIAL -->
-                        <div class="mb-3">
+                        <div class="mb-4">
 
-                            <label class="fw-semibold">
+                            <label class="form-label">
                                 Chất liệu
                             </label>
 
@@ -148,82 +352,136 @@
 
                         </div>
 
-                        <!-- CATEGORY -->
-                        <div class="mb-3">
+                        <div class="mb-4">
 
-                            <label class="fw-semibold">
+                            <label class="form-label">
                                 Danh mục
                             </label>
 
-                            <select th:field="*{category}"
-                                    class="form-select">
+                            <select name="category.id"
+                                    class="form-select"
+                                    required>
+
+                                <option value="">
+                                    -- Chọn danh mục --
+                                </option>
 
                                 <option th:each="c : ${categories}"
                                         th:value="${c.id}"
-                                        th:text="${c.name}">
+                                        th:text="${c.name}"
+                                        th:selected="${product.category != null && product.category.id == c.id}">
                                 </option>
 
                             </select>
 
                         </div>
 
-                        <!-- DESCRIPTION -->
-                        <div class="mb-3">
+                    </div>
 
-                            <label class="fw-semibold">
-                                Mô tả
+                    <!-- RIGHT -->
+                    <div class="col-lg-5">
+
+                        <!-- IMAGE -->
+                        <div class="mb-4">
+
+                            <label class="form-label">
+                                Hình ảnh
                             </label>
 
-                            <textarea th:field="*{description}"
-                                      class="form-control"
-                                      rows="5">
-                            </textarea>
+                            <input type="file"
+                                   name="file"
+                                   class="form-control"
+                                   accept="image/*"
+                                   onchange="previewImage(event)">
 
-                        </div>
+                            <div class="preview-box mt-3">
 
-                        <!-- SALE -->
-                        <div class="card border-0 bg-light mt-4">
+                                <div class="image-label">
+                                    Ảnh hiện tại
+                                </div>
 
-                            <div class="card-body">
-
-                                <h5 class="fw-bold text-danger mb-3">
-                                    🔥 Quản lý Sale
-                                </h5>
-
-                                <input type="number"
-                                       name="discountpercent"
-                                       class="form-control"
-                                       min="0"
-                                       max="100"
-
-                                       th:value="${product.sale != null
-                                       ? product.sale.discountpercent
-                                       : ''}">
+                                <img id="preview"
+                                     th:src="${product.image != null}
+                                     ? @{/uploads/{img}(img=${product.image})}
+                                     : @{/images/no-image.png}"
+                                     class="preview">
 
                             </div>
 
                         </div>
 
-                        <div class="mt-4">
+                        <!-- SALE -->
+                        <div class="sale-box">
 
-                            <button class="btn btn-dark px-4 rounded-pill">
-                                Cập nhật
-                            </button>
+                            <h5 class="text-danger mb-3">
+                                🔥 Giảm giá
+                            </h5>
 
-                            <a href="/admin/products"
-                               class="btn btn-secondary rounded-pill">
-
-                                Quay lại
-
-                            </a>
+                            <input type="number"
+                                   name="discountpercent"
+                                   class="form-control"
+                                   min="0"
+                                   max="100"
+                                   placeholder="VD: 20"
+                                   th:value="${product.sale != null ? product.sale.discountpercent : ''}">
 
                         </div>
 
-                    </form>
+                    </div>
 
                 </div>
 
-            </div>
+                <!-- DESCRIPTION -->
+                <div class="mt-4">
+
+                    <label class="form-label">
+                        Mô tả
+                    </label>
+
+                    <textarea th:field="*{description}"
+                              class="form-control"
+                              rows="6"></textarea>
+
+                </div>
+
+                <!-- BUTTON -->
+                <div class="mt-5 d-flex flex-wrap gap-3">
+
+                    <button type="submit"
+                            class="btn-save">
+
+                        <i class="fa fa-save"></i>
+                        Cập nhật
+
+                    </button>
+
+                    <a href="/admin/products"
+                       class="btn-back">
+
+                        <i class="fa fa-arrow-left"></i>
+                        Quay lại
+
+                    </a>
+
+                </div>
+
+            </form>
+
+            <!-- DELETE FORM -->
+            <form th:action="@{'/admin/products/delete/' + ${product.id}}"
+                  method="post"
+                  class="mt-3"
+                  onsubmit="return confirm('Bạn có chắc muốn xóa sản phẩm này?')">
+
+                <button type="submit"
+                        class="btn-delete">
+
+                    <i class="fa fa-trash"></i>
+                    Xóa sản phẩm
+
+                </button>
+
+            </form>
 
         </div>
 
@@ -235,21 +493,16 @@
 
     function previewImage(event){
 
-        let img = document.getElementById('preview');
+        const file = event.target.files[0];
 
-        // nếu chưa có ảnh preview
-        if(!img){
+        if(file){
 
-            img = document.createElement("img");
+            const img =
+                document.getElementById('preview');
 
-            img.id = "preview";
-
-            img.className = "preview mt-3";
-
-            event.target.parentElement.appendChild(img);
+            img.src =
+                URL.createObjectURL(file);
         }
-
-        img.src = URL.createObjectURL(event.target.files[0]);
     }
 
 </script>

@@ -7,15 +7,18 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-public interface ProductRepository extends JpaRepository<Product, Long> {
+public interface ProductRepository
+        extends JpaRepository<Product, Long> {
 
     // ================= ALL PRODUCT =================
+
     Page<Product> findByNameContainingIgnoreCase(
             String keyword,
             Pageable pageable
     );
 
     // ================= FILTER CATEGORY =================
+
     Page<Product> findByNameContainingIgnoreCaseAndCategory(
             String keyword,
             Category category,
@@ -23,12 +26,15 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     );
 
     // ================= SALE PRODUCT =================
+
     @Query("""
             SELECT p
             FROM Product p
             JOIN p.sale s
             WHERE s.isactive = 1
             """)
-    Page<Product> getSaleProducts(Pageable pageable);
+    Page<Product> getSaleProducts(
+            Pageable pageable
+    );
 
 }
