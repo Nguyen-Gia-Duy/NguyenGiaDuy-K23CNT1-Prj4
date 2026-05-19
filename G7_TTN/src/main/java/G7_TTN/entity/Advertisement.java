@@ -2,6 +2,7 @@ package G7_TTN.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -15,12 +16,21 @@ public class Advertisement {
     private Long id;
 
     private String name;
+
     private String image;
+
     private String linkurl;
+
     private String position;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private Date startdate;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private Date enddate;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private Date createddate;
+
     private Integer isactive;
 }

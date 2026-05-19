@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>
+        Quản lý danh mục | Admin
+    </title>
+
+    <!-- BOOTSTRAP -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <!-- FONT -->
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- ICON -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins',sans-serif;
+        }
+
+        body{
+            background:#f5f6fa;
+        }
+
+        /* ================= SIDEBAR ================= */
+
+        .sidebar{
+            width:240px;
+            height:100vh;
+            position:fixed;
+            top:0;
+            left:0;
+            background:#111;
+            padding-top:25px;
+        }
+
+        .logo{
+            color:#fff;
+            text-align:center;
+            font-size:28px;
+            font-weight:700;
+            margin-bottom:35px;
+        }
+
+        .sidebar a{
+            display:flex;
+            align-items:center;
+            gap:12px;
+
+            padding:14px 22px;
+
+            color:#ccc;
+            text-decoration:none;
+
+            transition:0.3s;
+        }
+
+        .sidebar a:hover{
+            background:#1e1e1e;
+            color:#fff;
+        }
+
+        .sidebar .active{
+            background:#0d6efd;
+            color:#fff;
+        }
+
+        /* ================= CONTENT ================= */
+
+        .content{
+            margin-left:240px;
+            padding:30px;
+        }
+
+        /* ================= TOPBAR ================= */
+
+        .topbar{
+            background:#fff;
+            padding:20px 25px;
+            border-radius:18px;
+
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+
+            margin-bottom:25px;
+
+            box-shadow:0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .topbar h4{
+            margin:0;
+            font-weight:700;
+        }
+
+        .topbar p{
+            margin:0;
+            color:#777;
+            font-size:14px;
+        }
+
+        /* ================= BUTTON ================= */
+
+        .btn-add{
+            background:#111;
+            color:#fff;
+
+            border:none;
+            border-radius:50px;
+
+            padding:12px 22px;
+            font-weight:600;
+
+            transition:0.3s;
+        }
+
+        .btn-add:hover{
+            background:#0d6efd;
+            color:#fff;
+            transform:translateY(-2px);
+        }
+
+        /* ================= TABLE BOX ================= */
+
+        .table-box{
+            background:#fff;
+            border-radius:22px;
+            padding:25px;
+
+            box-shadow:0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .table{
+            margin:0;
+        }
+
+        .table thead th{
+            border:none;
+            background:#f8f9fa;
+
+            padding:18px 15px;
+
+            color:#666;
+            font-size:14px;
+            font-weight:600;
+        }
+
+        .table tbody td{
+            padding:18px 15px;
+            vertical-align:middle;
+            border-color:#f1f1f1;
+        }
+
+        .table tbody tr{
+            transition:0.3s;
+        }
+
+        .table tbody tr:hover{
+            background:#fafafa;
+        }
+
+        /* ================= CATEGORY ================= */
+
+        .category-name{
+            font-weight:600;
+            color:#111;
+            margin-bottom:4px;
+        }
+
+        .category-slug{
+            color:#888;
+            font-size:13px;
+        }
+
+        /* ================= PARENT ================= */
+
+        .parent-badge{
+            background:#eef2ff;
+            color:#0d6efd;
+
+            padding:8px 14px;
+            border-radius:50px;
+
+            font-size:13px;
+            font-weight:600;
+        }
+
+        .no-parent{
+            color:#999;
+            font-size:14px;
+        }
+
+        /* ================= STATUS ================= */
+
+        .status-active{
+            background:#dcfce7;
+            color:#198754;
+
+            padding:7px 14px;
+            border-radius:50px;
+
+            font-size:13px;
+            font-weight:600;
+        }
+
+        .status-hide{
+            background:#fee2e2;
+            color:#dc3545;
+
+            padding:7px 14px;
+            border-radius:50px;
+
+            font-size:13px;
+            font-weight:600;
+        }
+
+        /* ================= ACTION ================= */
+
+        .action-btn{
+            width:38px;
+            height:38px;
+
+            border:none;
+            border-radius:12px;
+
+            color:#fff;
+
+            transition:0.3s;
+        }
+
+        .btn-edit{
+            background:#f59e0b;
+        }
+
+        .btn-delete{
+            background:#dc3545;
+        }
+
+        .action-btn:hover{
+            transform:translateY(-2px);
+            opacity:0.9;
+        }
+
+        /* ================= EMPTY ================= */
+
+        .empty-box{
+            text-align:center;
+            padding:60px 20px;
+            color:#999;
+        }
+
+        .empty-box i{
+            font-size:60px;
+            margin-bottom:15px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media(max-width:992px){
+
+            .sidebar{
+                width:100%;
+                height:auto;
+                position:relative;
+            }
+
+            .content{
+                margin-left:0;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<!-- ================= SIDEBAR ================= -->
+
+<div class="sidebar">
+
+    <div class="logo">
+        ⚙ G7 ADMIN
+    </div>
+
+    <!-- DASHBOARD -->
+
+    <a href="/admin">
+
+        <i class="fa-solid fa-chart-line"></i>
+
+        Dashboard
+
+    </a>
+
+    <!-- PRODUCT -->
+
+    <a href="/admin/products">
+
+        <i class="fa-solid fa-box"></i>
+
+        Sản phẩm
+
+    </a>
+
+    <!-- CATEGORY -->
+
+    <a href="/admin/category"
+       class="active">
+
+        <i class="fa-solid fa-layer-group"></i>
+
+        Danh mục
+
+    </a>
+
+    <!-- ORDER -->
+
+    <a href="/admin/orders">
+
+        <i class="fa-solid fa-cart-shopping"></i>
+
+        Đơn hàng
+
+    </a>
+
+    <!-- USER -->
+
+    <a href="/admin/users">
+
+        <i class="fa-solid fa-users"></i>
+
+        Người dùng
+
+    </a>
+
+    <!-- ADS -->
+
+    <a href="/admin/advertisement">
+
+        <i class="fa-solid fa-image"></i>
+
+        Quảng cáo
+
+    </a>
+
+    <!-- USER PAGE -->
+
+    <a href="/user">
+
+        <i class="fa-solid fa-house"></i>
+
+        Trang user
+
+    </a>
+
+    <hr class="text-secondary">
+
+    <!-- LOGOUT -->
+
+    <a href="/logout"
+       class="text-danger">
+
+        <i class="fa-solid fa-right-from-bracket"></i>
+
+        Đăng xuất
+
+    </a>
+
+</div>
+
+<!-- ================= CONTENT ================= -->
+
+<div class="content">
+
+    <!-- TOPBAR -->
+
+    <div class="topbar">
+
+        <div>
+
+            <h4>Quản lý danh mục</h4>
+
+            <p>
+                Quản lý toàn bộ danh mục trong hệ thống G7 Fashion
+            </p>
+
+        </div>
+
+        <a href="/admin/category/create"
+           class="btn btn-add">
+
+            <i class="fa fa-plus"></i>
+
+            Thêm danh mục
+
+        </a>
+
+    </div>
+
+    <!-- ================= TABLE ================= -->
+
+    <div class="table-box">
+
+        <div class="table-responsive">
+
+            <table class="table align-middle">
+
+                <thead>
+
+                <tr>
+
+                    <th>ID</th>
+                    <th>Danh mục</th>
+                    <th>Danh mục cha</th>
+                    <th>Trạng thái</th>
+                    <th>Hành động</th>
+
+                </tr>
+
+                </thead>
+
+                <tbody>
+
+                <!-- LOOP -->
+
+                <tr th:each="c : ${categories}">
+
+                    <!-- ID -->
+
+                    <td>
+
+                        <strong>
+                            #<span th:text="${c.id}"></span>
+                        </strong>
+
+                    </td>
+
+                    <!-- CATEGORY -->
+
+                    <td>
+
+                        <div class="category-name"
+                             th:text="${c.name}">
+                        </div>
+
+                        <div class="category-slug"
+                             th:text="${c.slug}">
+                        </div>
+
+                    </td>
+
+                    <!-- PARENT -->
+
+                    <td>
+
+                        <span th:if="${c.parent != null}"
+                              class="parent-badge"
+                              th:text="${c.parent.name}">
+                        </span>
+
+                        <span th:if="${c.parent == null}"
+                              class="no-parent">
+
+                            Không có
+
+                        </span>
+
+                    </td>
+
+                    <!-- STATUS -->
+
+                    <td>
+
+                        <span th:if="${c.isactive == 1}"
+                              class="status-active">
+
+                            Hiển thị
+
+                        </span>
+
+                        <span th:if="${c.isactive == 0}"
+                              class="status-hide">
+
+                            Ẩn
+
+                        </span>
+
+                    </td>
+
+                    <!-- ACTION -->
+
+                    <td>
+
+                        <div class="d-flex gap-2">
+
+                            <!-- EDIT -->
+
+                            <a th:href="@{/admin/category/edit/{id}(id=${c.id})}">
+
+                                <button class="action-btn btn-edit">
+
+                                    <i class="fa fa-pen"></i>
+
+                                </button>
+
+                            </a>
+
+                            <!-- DELETE -->
+
+                            <form th:action="@{/admin/category/delete/{id}(id=${c.id})}"
+                                  method="post"
+                                  onsubmit="return confirm('Bạn có chắc muốn xóa danh mục này?')">
+
+                                <button type="submit"
+                                        class="action-btn btn-delete">
+
+                                    <i class="fa fa-trash"></i>
+
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                <!-- EMPTY -->
+
+                <tr th:if="${#lists.isEmpty(categories)}">
+
+                    <td colspan="5">
+
+                        <div class="empty-box">
+
+                            <i class="fa fa-layer-group"></i>
+
+                            <h5>
+                                Chưa có danh mục nào
+                            </h5>
+
+                            <p>
+                                Hãy thêm danh mục đầu tiên
+                            </p>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

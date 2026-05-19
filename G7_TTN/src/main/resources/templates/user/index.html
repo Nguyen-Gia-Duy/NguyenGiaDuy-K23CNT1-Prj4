@@ -4,6 +4,8 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Trang chủ | G7 Fashion</title>
 
     <!-- BOOTSTRAP -->
@@ -26,9 +28,13 @@
             box-sizing:border-box;
         }
 
+        html{
+            scroll-behavior:smooth;
+        }
+
         body{
             font-family:'Poppins',sans-serif;
-            background:#f5f5f5;
+            background:#f5f7fb;
             overflow-x:hidden;
         }
 
@@ -36,24 +42,31 @@
             text-decoration:none;
         }
 
+        .container{
+            max-width:1320px;
+        }
+
         /* ================= NAVBAR ================= */
 
         .navbar{
-            background:linear-gradient(90deg,#111,#222);
+            background:rgba(17,17,17,0.92)!important;
+            backdrop-filter:blur(10px);
             padding:14px 0;
+            box-shadow:0 4px 20px rgba(0,0,0,0.08);
         }
 
         .navbar-brand{
-            font-weight:700;
             font-size:30px;
+            font-weight:700;
             color:#fff !important;
         }
 
         .nav-link{
             color:#ddd !important;
-            margin:0 8px;
-            position:relative;
             font-weight:500;
+            margin:0 10px;
+            transition:.3s;
+            position:relative;
         }
 
         .nav-link:hover{
@@ -66,193 +79,272 @@
             width:0;
             height:2px;
             left:0;
-            bottom:-2px;
-            background:#fff;
-            transition:0.3s;
+            bottom:-4px;
+            background:#dc3545;
+            transition:.3s;
         }
 
         .nav-link:hover::after{
             width:100%;
         }
 
-        .dropdown-menu{
-            border:none;
-            border-radius:15px;
-            padding:10px;
-            box-shadow:0 10px 30px rgba(0,0,0,0.1);
+        .search-box{
+            width:260px;
         }
 
-        .dropdown-item{
-            border-radius:10px;
-            padding:10px 14px;
-        }
-
-        .dropdown-item:hover{
-            background:#111;
-            color:#fff;
+        .navbar-icon-btn{
+            width:44px;
+            height:44px;
+            border-radius:50%;
+            display:flex;
+            align-items:center;
+            justify-content:center;
         }
 
         /* ================= HERO ================= */
 
-        .hero{
-            height:650px;
-
-            background:
-                    linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.55)),
-                    url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=2070&auto=format&fit=crop')
-                    center/cover no-repeat;
-
+        .hero-slide{
+            height:720px;
             display:flex;
             align-items:center;
-            color:#fff;
+            position:relative;
         }
 
-        .hero h1{
-            font-size:70px;
+        .hero-slide::before{
+            content:'';
+            position:absolute;
+            inset:0;
+            background:rgba(0,0,0,0.5);
+        }
+
+        .hero-content{
+            position:relative;
+            z-index:2;
+            max-width:650px;
+        }
+
+        .hero-title{
+            color:#fff;
+            font-size:68px;
             font-weight:700;
             line-height:1.2;
         }
 
-        .hero p{
+        .hero-text{
+            color:#eee;
             font-size:18px;
-            margin-top:20px;
-            margin-bottom:30px;
-            color:#ddd;
+            margin:25px 0 35px;
         }
 
         .hero-btn{
-            padding:14px 35px;
+            padding:15px 38px;
             border-radius:50px;
             font-weight:600;
+            font-size:16px;
+        }
+
+        /* ================= SECTION ================= */
+
+        .section{
+            padding:85px 0 10px;
+        }
+
+        .section-header{
+            text-align:center;
+            margin-bottom:50px;
+        }
+
+        .section-title{
+            font-size:38px;
+            font-weight:700;
+            display:inline-block;
+            position:relative;
+            padding-bottom:14px;
+        }
+
+        .section-title::after{
+            content:'';
+            position:absolute;
+            width:70px;
+            height:4px;
+            background:#dc3545;
+            left:50%;
+            transform:translateX(-50%);
+            bottom:0;
+            border-radius:50px;
         }
 
         /* ================= CATEGORY ================= */
 
         .category-box{
             background:#fff;
-            border-radius:20px;
-            padding:30px;
+            border-radius:28px;
+            padding:35px 25px;
             text-align:center;
-            transition:0.3s;
+            box-shadow:0 10px 30px rgba(0,0,0,0.06);
+            transition:.4s;
             height:100%;
-            box-shadow:0 5px 20px rgba(0,0,0,0.05);
         }
 
         .category-box:hover{
-            transform:translateY(-8px);
-            box-shadow:0 10px 30px rgba(0,0,0,0.12);
+            transform:translateY(-10px);
         }
 
         .category-icon{
-            font-size:45px;
-            margin-bottom:15px;
-            color:#111;
+            font-size:52px;
+            margin-bottom:18px;
         }
 
         /* ================= PRODUCT ================= */
 
-        .section-title{
-            font-weight:700;
-            margin-bottom:30px;
-        }
-
         .product-card{
-            border:none;
-            border-radius:22px;
-            overflow:hidden;
             background:#fff;
-            transition:0.3s;
+            border:none;
+            border-radius:24px;
+            overflow:hidden;
+            transition:.4s;
+            box-shadow:0 10px 30px rgba(0,0,0,0.06);
             height:100%;
-            box-shadow:0 5px 20px rgba(0,0,0,0.06);
         }
 
         .product-card:hover{
-            transform:translateY(-10px);
-            box-shadow:0 15px 40px rgba(0,0,0,0.15);
+            transform:translateY(-8px);
+            box-shadow:0 20px 45px rgba(0,0,0,0.12);
         }
 
         .product-img{
-            height:280px;
+            width:100%;
+            height:320px;
             object-fit:cover;
+            transition:.5s;
+        }
+
+        .product-card:hover .product-img{
+            transform:scale(1.05);
         }
 
         .product-name{
+            font-size:17px;
             font-weight:600;
-            font-size:16px;
-            min-height:48px;
+            min-height:50px;
         }
 
         .price{
             color:#dc3545;
-            font-size:20px;
+            font-size:22px;
             font-weight:700;
-        }
-
-        .old-price{
-            text-decoration:line-through;
-            color:#888;
-            font-size:14px;
         }
 
         .sale-badge{
             position:absolute;
             top:15px;
             left:15px;
-            background:red;
+            background:#dc3545;
             color:#fff;
-            padding:7px 14px;
-            border-radius:30px;
+            padding:8px 15px;
+            border-radius:50px;
             font-size:13px;
             font-weight:600;
+            z-index:5;
+        }
+
+        /* ================= BUTTON ================= */
+
+        .btn-dark,
+        .btn-danger,
+        .btn-light{
+            border-radius:50px !important;
+            transition:.3s;
+        }
+
+        .btn-dark:hover,
+        .btn-danger:hover,
+        .btn-light:hover{
+            transform:translateY(-2px);
         }
 
         /* ================= BANNER ================= */
 
         .banner{
-            border-radius:30px;
-            overflow:hidden;
             position:relative;
-            min-height:300px;
-            display:flex;
-            align-items:center;
-            padding:50px;
+            border-radius:35px;
+            overflow:hidden;
+            padding:110px 30px;
+            text-align:center;
             color:#fff;
+            box-shadow:0 15px 40px rgba(0,0,0,0.12);
         }
 
-        .banner-dark{
-            background:
-                    linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
-                    url('https://images.unsplash.com/photo-1496747611176-843222e1e57c?q=80&w=2070&auto=format&fit=crop')
-                    center/cover;
+        .banner::before{
+            content:'';
+            position:absolute;
+            inset:0;
+            background:rgba(0,0,0,0.35);
         }
 
-        .banner-red{
+        .banner-content{
+            position:relative;
+            z-index:2;
+        }
+
+        .banner h2{
+            font-size:58px;
+            font-weight:700;
+        }
+
+        .banner p{
+            font-size:20px;
+            margin-top:18px;
+            margin-bottom:35px;
+        }
+
+        .vest-banner{
             background:
-                    linear-gradient(rgba(220,53,69,0.7),rgba(220,53,69,0.7)),
-                    url('https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=2070&auto=format&fit=crop')
-                    center/cover;
+                    url('/images/vest-banner.jpg')
+                    center/cover no-repeat;
+        }
+
+        .sale-banner{
+            background:
+                    url('/images/sale-banner.jpg')
+                    center/cover no-repeat;
         }
 
         /* ================= POLICY ================= */
 
         .policy-box{
             background:#fff;
-            padding:30px;
-            border-radius:20px;
+            border-radius:24px;
+            padding:35px 20px;
             text-align:center;
-            transition:0.3s;
             height:100%;
-            box-shadow:0 5px 20px rgba(0,0,0,0.05);
+            box-shadow:0 10px 30px rgba(0,0,0,0.05);
+            transition:.3s;
         }
 
         .policy-box:hover{
-            transform:translateY(-5px);
+            transform:translateY(-6px);
         }
 
         .policy-icon{
-            font-size:40px;
+            font-size:42px;
             margin-bottom:15px;
-            color:#111;
+        }
+
+        /* ================= VIDEO ================= */
+
+        .video-box{
+            background:#111;
+            border-radius:35px;
+            overflow:hidden;
+            padding:18px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.12);
+        }
+
+        .video-box video{
+            width:100%;
+            border-radius:20px;
+            display:block;
         }
 
         /* ================= FOOTER ================= */
@@ -260,21 +352,21 @@
         .footer{
             background:#111;
             color:#ccc;
-            margin-top:80px;
-            padding-top:60px;
+            margin-top:90px;
+            padding-top:70px;
         }
 
         .footer-title{
             color:#fff;
-            font-weight:600;
             margin-bottom:20px;
+            font-weight:600;
         }
 
         .footer a{
             color:#bbb;
-            display:block;
             margin-bottom:10px;
-            transition:0.3s;
+            display:block;
+            transition:.3s;
         }
 
         .footer a:hover{
@@ -285,18 +377,20 @@
         .social-icons a{
             width:42px;
             height:42px;
-            background:#222;
             border-radius:50%;
+            background:#222;
             display:inline-flex;
             align-items:center;
             justify-content:center;
             margin-right:10px;
             color:#fff;
-            font-size:18px;
         }
 
-        .social-icons a:hover{
-            background:#dc3545;
+        .footer-map{
+            width:100%;
+            height:250px;
+            border:none;
+            border-radius:20px;
         }
 
         .payment-logo img{
@@ -307,165 +401,148 @@
 
         /* ================= RESPONSIVE ================= */
 
-        @media(max-width:768px){
+        @media(max-width:992px){
 
-            .hero{
-                height:auto;
-                padding:100px 0;
-                text-align:center;
+            .hero-title{
+                font-size:48px;
             }
 
-            .hero h1{
+            .banner h2{
                 font-size:42px;
             }
 
-            .banner{
-                padding:35px;
+            .search-box{
+                width:100%;
+                margin:15px 0;
             }
+
         }
 
+        @media(max-width:768px){
+
+            .hero-slide{
+                height:520px;
+            }
+
+            .hero-title{
+                font-size:38px;
+            }
+
+            .hero-text{
+                font-size:16px;
+            }
+
+            .section-title{
+                font-size:28px;
+            }
+
+            .product-img{
+                height:240px;
+            }
+
+            .banner{
+                padding:70px 20px;
+            }
+
+            .banner h2{
+                font-size:34px;
+            }
+
+            .banner p{
+                font-size:16px;
+            }
+
+        }
+<!-- THÊM CSS NÀY VÀO TRONG <style> -->
+
+.cart-btn{
+    background:#dc3545;
+    color:#fff !important;
+    border:none;
+    border-radius:50px;
+    padding:10px 22px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.cart-btn:hover{
+    background:#bb2d3b;
+    color:#fff !important;
+    transform:translateY(-2px);
+}
+
+.product-img{
+    width:100%;
+    height:320px;
+    object-fit:cover;
+    transition:.5s;
+    background:#f3f3f3;
+}
     </style>
+
 </head>
 
 <body>
 
-<!-- ================= NAVBAR ================= -->
 
-<nav class="navbar navbar-expand-lg navbar-dark sticky-top shadow">
+
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
 
     <div class="container">
 
         <a class="navbar-brand" href="/user">
-            🛍 G7 Fashion
+            🛍 G7 TTN
         </a>
 
         <button class="navbar-toggler"
+                type="button"
                 data-bs-toggle="collapse"
-                data-bs-target="#nav">
+                data-bs-target="#navbarContent">
 
             <span class="navbar-toggler-icon"></span>
 
         </button>
 
-        <div class="collapse navbar-collapse"
-             id="nav">
+        <div class="collapse navbar-collapse" id="navbarContent">
 
-            <!-- MENU -->
-            <ul class="navbar-nav me-auto ms-4">
+            <!-- LEFT MENU -->
+            <ul class="navbar-nav ms-4">
 
                 <li class="nav-item">
-                    <a class="nav-link active"
-                       href="/user">
-
+                    <a class="nav-link active" href="/user">
                         Trang chủ
-
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link"
-                       href="/products">
-
+                    <a class="nav-link" href="/products">
                         Sản phẩm
-
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link text-warning fw-bold"
-                       href="/sale">
-
-                        🔥 Sale
-
+                    <a class="nav-link text-warning fw-bold" href="/sale">
+                         Sale
                     </a>
-                </li>
-
-                <!-- CATEGORY -->
-                <li class="nav-item dropdown">
-
-                    <a class="nav-link dropdown-toggle"
-                       href="#"
-                       data-bs-toggle="dropdown">
-
-                        Danh mục
-
-                    </a>
-
-                    <ul class="dropdown-menu">
-
-                        <li>
-                            <a class="dropdown-item"
-                               href="/products?type=ao">
-
-                                👕 Áo nam
-
-                            </a>
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item"
-                               href="/products?type=quan">
-
-                                👖 Quần nam
-
-                            </a>
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item"
-                               href="/products?type=phukien">
-
-                                ⌚ Phụ kiện
-
-                            </a>
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item"
-                               href="/products">
-
-                                🛍 Tất cả sản phẩm
-
-                            </a>
-                        </li>
-
-                    </ul>
-
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link"
-                       href="/news">
-
-                        Tin tức
-
+                    <a class="nav-link" href="/advertisement">
+                         Quảng cáo
                     </a>
-                </li>
-
-                <!-- ADMIN -->
-                <li class="nav-item"
-                    sec:authorize="hasRole('ADMIN')">
-
-                    <a class="nav-link text-warning fw-bold"
-                       href="/admin">
-
-                        ⚙ Admin
-
-                    </a>
-
                 </li>
 
             </ul>
 
             <!-- SEARCH -->
-            <form class="d-flex me-3"
+            <form class="d-flex mx-auto search-box"
                   action="/products"
                   method="get">
 
                 <input type="search"
                        class="form-control rounded-pill me-2"
-                       name="keyword"
-                       placeholder="Tìm sản phẩm...">
+                       placeholder="Tìm sản phẩm..."
+                       name="keyword">
 
                 <button class="btn btn-light rounded-pill">
                     <i class="bi bi-search"></i>
@@ -476,7 +553,6 @@
             <!-- RIGHT -->
             <ul class="navbar-nav align-items-center">
 
-                <!-- LOGIN -->
                 <li class="nav-item"
                     sec:authorize="!isAuthenticated()">
 
@@ -489,22 +565,58 @@
 
                 </li>
 
-                <!-- USER -->
-                <li class="nav-item me-3"
+                <li class="nav-item dropdown"
                     sec:authorize="isAuthenticated()">
 
-                    <span class="text-white">
-                        👋 <span sec:authentication="name"></span>
-                    </span>
+                    <a class="nav-link dropdown-toggle text-white"
+                       href="#"
+                       data-bs-toggle="dropdown">
+
+                        Xin chao, <span sec:authentication="name"></span>
+
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-end">
+
+                        <li>
+                            <a class="dropdown-item" href="/profile">
+                                <i class="bi bi-person-circle me-2"></i>
+                                Thông tin cá nhân
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item" href="/orders">
+                                <i class="bi bi-bag-check me-2"></i>
+                                Đơn hàng
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item" href="/cart">
+                                <i class="bi bi-cart3 me-2"></i>
+                                Giỏ hàng
+                            </a>
+                        </li>
+
+                        <li><hr class="dropdown-divider"></li>
+
+                        <li>
+                            <a class="dropdown-item text-danger" href="/logout">
+                                <i class="bi bi-box-arrow-right me-2"></i>
+                                Đăng xuất
+                            </a>
+                        </li>
+
+                    </ul>
 
                 </li>
 
-                <!-- CART -->
-                <li class="nav-item"
+                <li class="nav-item ms-3"
                     sec:authorize="isAuthenticated()">
 
                     <a href="/cart"
-                       class="btn btn-danger rounded-pill position-relative">
+                       class="btn btn-danger rounded-pill position-relative navbar-icon-btn">
 
                         <i class="bi bi-cart3"></i>
 
@@ -524,38 +636,14 @@
 
 </nav>
 
-<!-- ================= HERO SLIDER ================= -->
+<!-- ================= HERO ================= -->
 
 <section id="heroSlider"
          class="carousel slide carousel-fade"
-         data-bs-ride="carousel"
-         data-bs-interval="3000">
+         data-bs-ride="carousel">
 
-    <!-- INDICATORS -->
-    <div class="carousel-indicators">
-
-        <button type="button"
-                data-bs-target="#heroSlider"
-                data-bs-slide-to="0"
-                class="active">
-        </button>
-
-        <button type="button"
-                data-bs-target="#heroSlider"
-                data-bs-slide-to="1">
-        </button>
-
-        <button type="button"
-                data-bs-target="#heroSlider"
-                data-bs-slide-to="2">
-        </button>
-
-    </div>
-
-    <!-- SLIDES -->
     <div class="carousel-inner">
 
-        <!-- SLIDE 1 -->
         <div class="carousel-item active">
 
             <div class="hero-slide"
@@ -567,7 +655,7 @@
 
                 <div class="container">
 
-                    <div class="col-lg-7 text-white">
+                    <div class="hero-content">
 
                         <h1 class="hero-title">
                             Thời Trang Nam <br>
@@ -575,8 +663,7 @@
                         </h1>
 
                         <p class="hero-text">
-                            Bộ sưu tập mới nhất dành cho nam giới hiện đại,
-                            lịch lãm và đẳng cấp.
+                            Bộ sưu tập thời trang hiện đại dành cho nam giới trẻ trung và lịch lãm.
                         </p>
 
                         <a href="/products"
@@ -594,208 +681,57 @@
 
         </div>
 
-        <!-- SLIDE 2 -->
-        <div class="carousel-item">
-
-            <div class="hero-slide"
-                 style="
-                 background:
-                 linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.55)),
-                 url('/images/banner2.jpg')
-                 center/cover no-repeat;">
-
-                <div class="container">
-
-                    <div class="col-lg-7 text-white">
-
-                        <h1 class="hero-title">
-                            Phong Cách <br>
-                            Streetwear
-                        </h1>
-
-                        <p class="hero-text">
-                            Trẻ trung - Cá tính - Chuẩn xu hướng 2026.
-                        </p>
-
-                        <a href="/products"
-                           class="btn btn-danger hero-btn">
-
-                            Khám phá
-
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <!-- SLIDE 3 -->
-        <div class="carousel-item">
-
-            <div class="hero-slide"
-                 style="
-                 background:
-                 linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.55)),
-                 url('/images/banner3.jpg')
-                 center/cover no-repeat;">
-
-                <div class="container">
-
-                    <div class="col-lg-7 text-white">
-
-                        <h1 class="hero-title">
-                            Sale Up To <br>
-                            50%
-                        </h1>
-
-                        <p class="hero-text">
-                            Ưu đãi cực sốc cho toàn bộ sản phẩm thời trang nam.
-                        </p>
-
-                        <a href="/sale"
-                           class="btn btn-warning hero-btn">
-
-                            Xem Sale
-
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
     </div>
-
-    <!-- BUTTON -->
-    <button class="carousel-control-prev"
-            type="button"
-            data-bs-target="#heroSlider"
-            data-bs-slide="prev">
-
-        <span class="carousel-control-prev-icon"></span>
-
-    </button>
-
-    <button class="carousel-control-next"
-            type="button"
-            data-bs-target="#heroSlider"
-            data-bs-slide="next">
-
-        <span class="carousel-control-next-icon"></span>
-
-    </button>
 
 </section>
 
-<!-- ================= CSS ADD ================= -->
-
-<style>
-
-    .hero-slide{
-        height:650px;
-        display:flex;
-        align-items:center;
-    }
-
-    .hero-title{
-        font-size:70px;
-        font-weight:700;
-        line-height:1.2;
-    }
-
-    .hero-text{
-        font-size:18px;
-        margin-top:20px;
-        margin-bottom:30px;
-        color:#eee;
-    }
-
-    .hero-btn{
-        padding:14px 35px;
-        border-radius:50px;
-        font-weight:600;
-    }
-
-    .carousel-indicators button{
-        width:12px !important;
-        height:12px !important;
-        border-radius:50%;
-    }
-
-    @media(max-width:768px){
-
-        .hero-slide{
-            height:500px;
-            text-align:center;
-        }
-
-        .hero-title{
-            font-size:42px;
-        }
-    }
-
-</style>
 <!-- ================= CATEGORY ================= -->
 
-<div class="container mt-5">
+<section class="section">
 
-    <div class="row g-4">
+    <div class="container">
 
-        <div class="col-md-4">
+        <div class="row g-4">
 
-            <div class="category-box">
+            <div class="col-md-4">
 
-                <div class="category-icon">
-                    👕
+                <div class="category-box">
+
+                    <div class="category-icon">👕</div>
+
+                    <h5>Áo Nam</h5>
+
+                    <p>Phong cách trẻ trung hiện đại</p>
+
                 </div>
-
-                <h5>Áo Nam</h5>
-
-                <p>
-                    Áo thun, áo polo, hoodie phong cách trẻ trung.
-                </p>
 
             </div>
 
-        </div>
+            <div class="col-md-4">
 
-        <div class="col-md-4">
+                <div class="category-box">
 
-            <div class="category-box">
+                    <div class="category-icon">👖</div>
 
-                <div class="category-icon">
-                    👖
+                    <h5>Quần Nam</h5>
+
+                    <p>Năng động và cá tính</p>
+
                 </div>
-
-                <h5>Quần Nam</h5>
-
-                <p>
-                    Quần jean, kaki, jogger hiện đại và cá tính.
-                </p>
 
             </div>
 
-        </div>
+            <div class="col-md-4">
 
-        <div class="col-md-4">
+                <div class="category-box">
 
-            <div class="category-box">
+                    <div class="category-icon">⌚</div>
 
-                <div class="category-icon">
-                    ⌚
+                    <h5>Phụ Kiện</h5>
+
+                    <p>Đồng hồ, ví, thắt lưng cao cấp</p>
+
                 </div>
-
-                <h5>Phụ Kiện</h5>
-
-                <p>
-                    Đồng hồ, ví, thắt lưng và nhiều phụ kiện khác.
-                </p>
 
             </div>
 
@@ -803,83 +739,213 @@
 
     </div>
 
-</div>
+</section>
 
 <!-- ================= PRODUCT ================= -->
 
-<div class="container mt-5">
+<section class="section pt-0">
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="container">
 
-        <h2 class="section-title">
-            🔥 Sản phẩm nổi bật
-        </h2>
+        <div class="section-header">
 
-        <a href="/products"
-           class="btn btn-dark rounded-pill px-4">
+            <h2 class="section-title">
+                🔥 Sản phẩm nổi bật
+            </h2>
 
-            Xem tất cả
+        </div>
 
-        </a>
+        <div class="row g-4">
 
-    </div>
+            <div class="col-lg-3 col-md-4 col-sm-6"
+                 th:each="p : ${products}">
 
-    <div class="row">
+                <div class="card product-card">
 
-        <div class="col-lg-3 col-md-4 col-sm-6 mb-4"
-             th:each="p : ${products}">
+                    <div class="sale-badge"
+                         th:if="${p.sale != null}">
 
-            <div class="card product-card">
+                        -<span th:text="${p.sale.discountpercent}"></span>%
 
-                <!-- SALE -->
-                <div class="sale-badge"
-                     th:if="${p.sale != null}">
-
-                    -<span th:text="${p.sale.discountpercent}"></span>%
-
-                </div>
-
-                <!-- IMAGE -->
-                <img th:src="@{/uploads/{img}(img=${p.image})}"
-                     class="product-img"
-                     th:alt="${p.name}">
-
-                <!-- BODY -->
-                <div class="card-body d-flex flex-column text-center">
-
-                    <div class="product-name"
-                         th:text="${p.name}">
                     </div>
 
-                    <div class="mt-2 mb-3">
+                    <img th:src="@{/uploads/{img}(img=${p.image})}"
+                         class="product-img"
+                         th:alt="${p.name}">
 
-                        <div class="price"
-                             th:text="${#numbers.formatDecimal(
-                             p.price,
-                             0,
-                             'COMMA',
-                             0,
-                             'POINT')} + ' VNĐ'">
+                    <div class="card-body text-center">
+
+                        <div class="product-name"
+                             th:text="${p.name}">
+                        </div>
+
+                        <div class="price mt-3"
+                             th:text="${#numbers.formatDecimal(p.price,0,'COMMA',0,'POINT')} + ' VNĐ'">
+                        </div>
+
+                        <div class="mt-4 d-flex justify-content-center gap-2">
+
+                            <a th:href="@{'/product/' + ${p.id}}"
+                               class="btn btn-dark px-4">
+
+                                Chi tiết
+
+                            </a>
+
+                            <a href="/cart"
+                               class="btn btn-danger px-4">
+
+                                Mua ngay
+
+                            </a>
+
                         </div>
 
                     </div>
 
-                    <div class="mt-auto">
+                </div>
 
-                        <a th:href="@{'/product/' + ${p.id}}"
-                           class="btn btn-dark rounded-pill btn-sm">
+            </div>
 
-                            Chi tiết
+        </div>
 
-                        </a>
+    </div>
 
-                        <a th:href="@{'/cart/add/' + ${p.id}}"
-                           class="btn btn-outline-danger rounded-pill btn-sm"
-                           sec:authorize="isAuthenticated()">
+</section>
 
-                            Thêm giỏ
+<!-- ================= PHỤ KIỆN ================= -->
 
-                        </a>
+<section class="section pt-0">
+
+    <div class="container">
+
+        <div class="section-header">
+
+            <h2 class="section-title">
+                ⌚ Phụ kiện thời trang
+            </h2>
+
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="card product-card">
+
+                    <img src="/images/watch.jpg"
+                         class="product-img">
+
+                    <div class="card-body text-center">
+
+                        <div class="product-name">
+                            Đồng hồ nam cao cấp
+                        </div>
+
+                        <div class="price mt-3">
+                            1,200,000 VNĐ
+                        </div>
+
+                        <div class="mt-4">
+                            <a href="/products"
+                               class="btn btn-danger px-4">
+
+                                Mua ngay
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="card product-card">
+
+                    <img src="/images/belt.jpg"
+                         class="product-img">
+
+                    <div class="card-body text-center">
+
+                        <div class="product-name">
+                            Thắt lưng da luxury
+                        </div>
+
+                        <div class="price mt-3">
+                            450,000 VNĐ
+                        </div>
+
+                        <div class="mt-4">
+                            <a href="/products"
+                               class="btn btn-danger px-4">
+
+                                Mua ngay
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="card product-card">
+
+                    <img src="/images/vi.jpg"
+                         class="product-img">
+
+                    <div class="card-body text-center">
+
+                        <div class="product-name">
+                            Ví da nam thời trang
+                        </div>
+
+                        <div class="price mt-3">
+                            350,000 VNĐ
+                        </div>
+
+                        <div class="mt-4">
+                            <a href="/products"
+                               class="btn btn-danger px-4">
+
+                                Mua ngay
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="card product-card">
+
+                    <img src="/images/bag.jpg"
+                         class="product-img">
+
+                    <div class="card-body text-center">
+
+                        <div class="product-name">
+                            Túi đeo chéo nam
+                        </div>
+
+                        <div class="price mt-3">
+                            520,000 VNĐ
+                        </div>
+
+                        <div class="mt-4">
+                            <a href="/products"
+                               class="btn btn-danger px-4">
+
+                                Mua ngay
+                            </a>
+                        </div>
 
                     </div>
 
@@ -891,250 +957,427 @@
 
     </div>
 
-</div>
-<!-- ================= ACCESSORIES ================= -->
+</section>
 
-<div class="container mt-5">
+<!-- ================= VEST BANNER ================= -->
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
+<section class="section pt-0">
 
-        <h2 class="section-title">
-            ⌚ Phụ kiện thời trang
-        </h2>
+    <div class="container">
+        <div class="section-header">
 
-        <a href="/products?type=phukien"
-           class="btn btn-dark rounded-pill px-4">
-
-            Xem thêm
-
-        </a>
-
-    </div>
-
-    <div class="row g-4">
-
-        <!-- ITEM -->
-        <div class="col-lg-3 col-md-6">
-
-            <div class="card product-card">
-
-                <img src="/images/watch.jpg"
-                     class="product-img">
-
-                <div class="card-body text-center">
-
-                    <h5>Đồng hồ nam</h5>
-
-                    <p class="text-muted">
-                        Thiết kế sang trọng và hiện đại
-                    </p>
-
-                    <a href="/products?type=phukien"
-                       class="btn btn-outline-dark rounded-pill">
-
-                        Xem ngay
-
-                    </a>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <!-- ITEM -->
-        <div class="col-lg-3 col-md-6">
-
-            <div class="card product-card">
-
-                <img src="/images/bag.jpg"
-                     class="product-img">
-
-                <div class="card-body text-center">
-
-                    <h5>Túi thời trang</h5>
-
-                    <p class="text-muted">
-                        Phù hợp mọi phong cách
-                    </p>
-
-                    <a href="/products?type=phukien"
-                       class="btn btn-outline-dark rounded-pill">
-
-                        Xem ngay
-
-                    </a>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <!-- ITEM -->
-        <div class="col-lg-3 col-md-6">
-
-            <div class="card product-card">
-
-                <img src="/images/belt.jpg"
-                     class="product-img">
-
-                <div class="card-body text-center">
-
-                    <h5>Thắt lưng</h5>
-
-                    <p class="text-muted">
-                        Chất liệu cao cấp
-                    </p>
-
-                    <a href="/products?type=phukien"
-                       class="btn btn-outline-dark rounded-pill">
-
-                        Xem ngay
-
-                    </a>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <!-- ITEM -->
-        <div class="col-lg-3 col-md-6">
-
-            <div class="card product-card">
-
-                <img src="/images/shoes.jpg"
-                     class="product-img">
-
-                <div class="card-body text-center">
-
-                    <h5>Giày nam</h5>
-
-                    <p class="text-muted">
-                        Trẻ trung và năng động
-                    </p>
-
-                    <a href="/products?type=phukien"
-                       class="btn btn-outline-dark rounded-pill">
-
-                        Xem ngay
-
-                    </a>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-<!-- ================= SALE BANNER ================= -->
-
-<div class="container mt-5">
-
-    <div class="banner banner-red">
-
-        <div>
-
-            <h2 class="fw-bold">
-                🔥 SALE UP TO 50%
+            <h2 class="section-title">
+                Veston cao cap
             </h2>
 
-            <p class="mt-3 mb-4">
-                Chương trình giảm giá lớn nhất năm
-                dành cho toàn bộ sản phẩm thời trang nam.
-            </p>
+        </div>
+        <div class="banner vest-banner">
 
-            <a href="/sale"
-               class="btn btn-light rounded-pill px-4">
+            <div class="banner-content">
 
-                Mua ngay
+                <h2>
+                    🤵 Bộ sưu tập Vest Luxury
+                </h2>
 
-            </a>
+                <p>
+                    Sang trọng - Đẳng cấp - Chuẩn quý ông hiện đại
+                </p>
+
+                <a href="/products?type=vest"
+                   class="btn btn-danger px-5 py-3">
+
+                    Khám phá ngay
+
+                </a>
+
+            </div>
 
         </div>
 
     </div>
 
-</div>
+</section>
+
+<!-- ================= VEST PRODUCT ================= -->
+
+<section class="section pt-0">
+
+    <div class="container">
+
+        <div class="row g-4">
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="card product-card">
+
+                    <img src="/images/vest1.jpg"
+                         class="product-img">
+
+                    <div class="card-body text-center">
+
+                        <div class="product-name">
+                            Vest Nam Luxury Black
+                        </div>
+
+                        <div class="price mt-3">
+                            2,500,000 VNĐ
+                        </div>
+
+                        <div class="mt-4">
+                            <a href="/products"
+                               class="btn btn-dark px-4">
+
+                                Mua ngay
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="card product-card">
+
+                    <img src="/images/vest2.jpg"
+                         class="product-img">
+
+                    <div class="card-body text-center">
+
+                        <div class="product-name">
+                            Vest Hàn Quốc Cao Cấp
+                        </div>
+
+                        <div class="price mt-3">
+                            2,900,000 VNĐ
+                        </div>
+
+                        <div class="mt-4">
+                            <a href="/products"
+                               class="btn btn-dark px-4">
+
+                                Mua ngay
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="card product-card">
+
+                    <img src="/images/vest3.jpg"
+                         class="product-img">
+
+                    <div class="card-body text-center">
+
+                        <div class="product-name">
+                            Vest Trắng Quý Ông
+                        </div>
+
+                        <div class="price mt-3">
+                            3,200,000 VNĐ
+                        </div>
+
+                        <div class="mt-4">
+                            <a href="/products"
+                               class="btn btn-dark px-4">
+
+                                Mua ngay
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= SALE ================= -->
+
+<section class="section pt-0">
+
+    <div class="container">
+        <div class="section-header">
+
+            <h2 class="section-title">
+                Hot sale
+            </h2>
+
+        </div>
+        <div class="banner sale-banner">
+
+            <div class="banner-content">
+
+                <h2>
+                    🔥 SALE UP TO 50%
+                </h2>
+
+                <p>
+                    Chương trình giảm giá lớn nhất năm
+                </p>
+
+                <a href="/sale"
+                   class="btn btn-light px-5 py-3">
+
+                    Mua ngay
+
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="row g-4 mt-4">
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="card product-card">
+
+                    <div class="sale-badge">
+                        -50%
+                    </div>
+
+                    <img src="/images/aosomi1.jpg"
+                         class="product-img">
+
+                    <div class="card-body text-center">
+
+                        <div class="product-name">
+                            Áo sơ mi premium
+                        </div>
+
+                        <div class="price mt-3">
+                            299,000 VNĐ
+                        </div>
+
+                        <div class="mt-4">
+                            <a href="/sale"
+                               class="btn btn-danger px-4">
+
+                                Mua ngay
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="card product-card">
+
+                    <div class="sale-badge">
+                        -40%
+                    </div>
+
+                    <img src="/images/sale2.jpg"
+                         class="product-img">
+
+                    <div class="card-body text-center">
+
+                        <div class="product-name">
+                            Quần jean nam
+                        </div>
+
+                        <div class="price mt-3">
+                            399,000 VNĐ
+                        </div>
+
+                        <div class="mt-4">
+                            <a href="/sale"
+                               class="btn btn-danger px-4">
+
+                                Mua ngay
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="card product-card">
+
+                    <div class="sale-badge">
+                        -35%
+                    </div>
+
+                    <img src="/images/sale3.jpg"
+                         class="product-img">
+
+                    <div class="card-body text-center">
+
+                        <div class="product-name">
+                            Áo polo nam
+                        </div>
+
+                        <div class="price mt-3">
+                            259,000 VNĐ
+                        </div>
+
+                        <div class="mt-4">
+                            <a href="/sale"
+                               class="btn btn-danger px-4">
+
+                                Mua ngay
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="card product-card">
+
+                    <div class="sale-badge">
+                        -25%
+                    </div>
+
+                    <img src="/images/sale4.jpg"
+                         class="product-img">
+
+                    <div class="card-body text-center">
+
+                        <div class="product-name">
+                            Áo khoác nam
+                        </div>
+
+                        <div class="price mt-3">
+                            499,000 VNĐ
+                        </div>
+
+                        <div class="mt-4">
+                            <a href="/sale"
+                               class="btn btn-danger px-4">
+
+                                Mua ngay
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= VIDEO ================= -->
+
+<section class="section pt-0">
+
+    <div class="container">
+
+        <div class="section-header">
+
+            <h2 class="section-title">
+                G7_TNN-Thoi trang phang thoi tiet
+            </h2>
+
+        </div>
+
+        <div class="video-box">
+
+            <video controls>
+
+                <source src="/images/vid.mp4"
+                        type="video/mp4">
+
+            </video>
+
+        </div>
+
+    </div>
+
+</section>
 
 <!-- ================= POLICY ================= -->
 
-<div class="container mt-5">
+<section class="section pt-0">
 
-    <div class="row g-4">
+    <div class="container">
 
-        <div class="col-md-3">
+        <div class="row g-4">
 
-            <div class="policy-box">
+            <div class="col-lg-3 col-md-6">
 
-                <div class="policy-icon">
-                    <i class="bi bi-truck"></i>
+                <div class="policy-box">
+
+                    <div class="policy-icon">
+                        <i class="bi bi-truck"></i>
+                    </div>
+
+                    <h6>Miễn phí vận chuyển</h6>
+
                 </div>
-
-                <h6>Miễn phí vận chuyển</h6>
-
-                <small>
-                    Đơn hàng từ 500.000 VNĐ
-                </small>
 
             </div>
 
-        </div>
+            <div class="col-lg-3 col-md-6">
 
-        <div class="col-md-3">
+                <div class="policy-box">
 
-            <div class="policy-box">
+                    <div class="policy-icon">
+                        <i class="bi bi-arrow-repeat"></i>
+                    </div>
 
-                <div class="policy-icon">
-                    <i class="bi bi-arrow-repeat"></i>
+                    <h6>Đổi trả dễ dàng</h6>
+
                 </div>
-
-                <h6>Đổi trả dễ dàng</h6>
-
-                <small>
-                    Hỗ trợ đổi trả 7 ngày
-                </small>
 
             </div>
 
-        </div>
+            <div class="col-lg-3 col-md-6">
 
-        <div class="col-md-3">
+                <div class="policy-box">
 
-            <div class="policy-box">
+                    <div class="policy-icon">
+                        <i class="bi bi-headset"></i>
+                    </div>
 
-                <div class="policy-icon">
-                    <i class="bi bi-headset"></i>
+                    <h6>Hỗ trợ 24/7</h6>
+
                 </div>
-
-                <h6>Hỗ trợ 24/7</h6>
-
-                <small>
-                    Hotline: 0964 942 121
-                </small>
 
             </div>
 
-        </div>
+            <div class="col-lg-3 col-md-6">
 
-        <div class="col-md-3">
+                <div class="policy-box">
 
-            <div class="policy-box">
+                    <div class="policy-icon">
+                        <i class="bi bi-credit-card"></i>
+                    </div>
 
-                <div class="policy-icon">
-                    <i class="bi bi-credit-card"></i>
+                    <h6>Thanh toán đa dạng</h6>
+
                 </div>
-
-                <h6>Thanh toán đa dạng</h6>
-
-                <small>
-                    COD - Visa - Banking
-                </small>
 
             </div>
 
@@ -1142,7 +1385,7 @@
 
     </div>
 
-</div>
+</section>
 
 <!-- ================= FOOTER ================= -->
 
@@ -1150,18 +1393,16 @@
 
     <div class="container">
 
-        <div class="row">
+        <div class="row g-4">
 
-            <!-- ABOUT -->
-            <div class="col-md-4 mb-4">
+            <div class="col-lg-3">
 
                 <h5 class="footer-title">
                     🛍 G7 Fashion
                 </h5>
 
                 <p>
-                    Thương hiệu thời trang nam hiện đại,
-                    trẻ trung và đẳng cấp tại Việt Nam.
+                    Thời trang nam hiện đại, trẻ trung và đẳng cấp.
                 </p>
 
                 <div class="social-icons mt-4">
@@ -1178,66 +1419,52 @@
                         <i class="bi bi-tiktok"></i>
                     </a>
 
-                    <a href="#">
-                        <i class="bi bi-youtube"></i>
-                    </a>
-
                 </div>
 
             </div>
 
-            <!-- MENU -->
-            <div class="col-md-4 mb-4">
+            <div class="col-lg-3">
 
                 <h5 class="footer-title">
                     📂 Danh mục
                 </h5>
 
-                <a href="/products?type=ao">
-                    Áo nam
-                </a>
-
-                <a href="/products?type=quan">
-                    Quần nam
-                </a>
-
-                <a href="/products?type=phukien">
-                    Phụ kiện
-                </a>
-
-                <a href="/sale">
-                    Sale
-                </a>
+                <a href="#">Áo nam</a>
+                <a href="#">Quần nam</a>
+                <a href="#">Phụ kiện</a>
+                <a href="#">Sale</a>
 
             </div>
 
-            <!-- CONTACT -->
-            <div class="col-md-4 mb-4">
+            <div class="col-lg-3">
+
+                <h5 class="footer-title text-center">
+                    📍 Bản đồ
+                </h5>
+
+                <iframe class="footer-map"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.134493949144!2d105.847!3d21.0285">
+                </iframe>
+
+            </div>
+
+            <div class="col-lg-3">
 
                 <h5 class="footer-title">
                     📞 Liên hệ
                 </h5>
 
-                <p>
-                    Hotline: 0964 942 121
-                </p>
+                <p>Hotline: 0964 942 121</p>
 
-                <p>
-                    Email: g7fashion@gmail.com
-                </p>
+                <p>Email: g7fashion@gmail.com</p>
 
-                <p>
-                    Hà Nội, Việt Nam
-                </p>
+                <p>Hà Nội, Việt Nam</p>
 
-                <!-- PAYMENT -->
                 <div class="payment-logo">
 
                     <img src="https://cdn-icons-png.flaticon.com/512/196/196578.png">
 
                     <img src="https://cdn-icons-png.flaticon.com/512/349/349221.png">
-
-                    <img src="https://cdn-icons-png.flaticon.com/512/5968/5968299.png">
 
                 </div>
 
@@ -1245,9 +1472,9 @@
 
         </div>
 
-        <hr class="border-secondary">
+        <hr class="border-secondary mt-5">
 
-        <div class="text-center pb-3">
+        <div class="text-center pb-4">
 
             © 2026 G7 Fashion - All Rights Reserved
 

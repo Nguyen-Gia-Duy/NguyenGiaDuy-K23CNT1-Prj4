@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Quảng cáo | G7 Fashion
+    </title>
+
+    <!-- BOOTSTRAP -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <!-- ICON -->
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- FONT AWESOME -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- FONT -->
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins',sans-serif;
+        }
+
+        body{
+            background:#f5f7fb;
+            overflow-x:hidden;
+        }
+
+        a{
+            text-decoration:none;
+        }
+
+        .container{
+            max-width:1320px;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar{
+            background:rgba(17,17,17,0.92)!important;
+            backdrop-filter:blur(10px);
+            padding:14px 0;
+            box-shadow:0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .navbar-brand{
+            font-size:30px;
+            font-weight:700;
+            color:#fff !important;
+        }
+
+        .nav-link{
+            color:#ddd !important;
+            font-weight:500;
+            margin:0 10px;
+            transition:.3s;
+            position:relative;
+        }
+
+        .nav-link:hover{
+            color:#fff !important;
+        }
+
+        .nav-link::after{
+            content:'';
+            position:absolute;
+            width:0;
+            height:2px;
+            left:0;
+            bottom:-4px;
+            background:#dc3545;
+            transition:.3s;
+        }
+
+        .nav-link:hover::after{
+            width:100%;
+        }
+
+        .search-box{
+            width:260px;
+        }
+
+        .navbar-icon-btn{
+            width:44px;
+            height:44px;
+            border-radius:50%;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+        }
+
+        /* ================= HEADER ================= */
+
+        .page-header{
+
+            background:
+                    linear-gradient(rgba(0,0,0,0.6),
+                    rgba(0,0,0,0.6)),
+                    url('/images/banner1.jpg')
+                    center/cover no-repeat;
+
+            color:#fff;
+
+            padding:120px 20px;
+
+            text-align:center;
+        }
+
+        .page-header h1{
+
+            font-size:58px;
+
+            font-weight:700;
+
+            margin-bottom:15px;
+        }
+
+        .page-header p{
+
+            color:#eee;
+
+            font-size:20px;
+        }
+
+        /* ================= ADS ================= */
+
+        .ads-section{
+
+            padding:70px 0;
+        }
+
+        .ads-card{
+
+            background:#fff;
+
+            border:none;
+
+            border-radius:28px;
+
+            overflow:hidden;
+
+            box-shadow:0 10px 30px rgba(0,0,0,0.08);
+
+            transition:.4s;
+
+            height:100%;
+        }
+
+        .ads-card:hover{
+
+            transform:translateY(-8px);
+
+            box-shadow:0 18px 45px rgba(0,0,0,0.12);
+        }
+
+        .ads-image{
+
+            width:100%;
+
+            height:280px;
+
+            object-fit:cover;
+
+            background:#f1f1f1;
+        }
+
+        .ads-content{
+
+            padding:25px;
+        }
+
+        .ads-position{
+
+            display:inline-block;
+
+            background:#eef2ff;
+
+            color:#4f46e5;
+
+            padding:8px 16px;
+
+            border-radius:50px;
+
+            font-size:13px;
+
+            font-weight:600;
+
+            margin-bottom:18px;
+        }
+
+        .ads-title{
+
+            font-size:24px;
+
+            font-weight:700;
+
+            margin-bottom:15px;
+        }
+
+        .ads-date{
+
+            color:#777;
+
+            margin-bottom:22px;
+        }
+
+        .ads-btn{
+
+            display:inline-flex;
+
+            align-items:center;
+
+            gap:10px;
+
+            background:#111827;
+
+            color:#fff;
+
+            padding:12px 24px;
+
+            border-radius:50px;
+
+            font-weight:600;
+
+            transition:.3s;
+        }
+
+        .ads-btn:hover{
+
+            background:#dc3545;
+
+            color:#fff;
+
+            transform:translateY(-2px);
+        }
+
+        /* ================= EMPTY ================= */
+
+        .empty-box{
+
+            background:#fff;
+
+            border-radius:30px;
+
+            padding:80px 20px;
+
+            text-align:center;
+
+            box-shadow:0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .empty-box i{
+
+            font-size:90px;
+
+            color:#cbd5e1;
+
+            margin-bottom:25px;
+        }
+
+        .empty-box h3{
+
+            font-weight:700;
+
+            margin-bottom:10px;
+        }
+
+        .empty-box p{
+
+            color:#777;
+        }
+
+        /* ================= FOOTER ================= */
+
+        .footer{
+            background:#111;
+            color:#ccc;
+            margin-top:70px;
+            padding-top:70px;
+        }
+
+        .footer-title{
+            color:#fff;
+            margin-bottom:20px;
+            font-weight:600;
+        }
+
+        .footer a{
+            color:#bbb;
+            margin-bottom:10px;
+            display:block;
+            transition:.3s;
+        }
+
+        .footer a:hover{
+            color:#fff;
+            transform:translateX(5px);
+        }
+
+        .social-icons a{
+            width:42px;
+            height:42px;
+            border-radius:50%;
+            background:#222;
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            margin-right:10px;
+            color:#fff;
+        }
+
+        @media(max-width:768px){
+
+            .page-header h1{
+                font-size:40px;
+            }
+
+            .ads-image{
+                height:220px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+
+    <div class="container">
+
+        <a class="navbar-brand" href="/user">
+            🛍 G7 TTN
+        </a>
+
+        <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarContent">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+        <div class="collapse navbar-collapse"
+             id="navbarContent">
+
+            <!-- LEFT -->
+
+            <ul class="navbar-nav ms-4">
+
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="/user">
+                        Trang chủ
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="/products">
+                        Sản phẩm
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-warning fw-bold"
+                       href="/sale">
+                        Sale
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active"
+                       href="/advertisement">
+                        Quảng cáo
+                    </a>
+                </li>
+
+            </ul>
+
+            <!-- SEARCH -->
+
+            <form class="d-flex mx-auto search-box"
+                  action="/products"
+                  method="get">
+
+                <input type="search"
+                       class="form-control rounded-pill me-2"
+                       placeholder="Tìm sản phẩm..."
+                       name="keyword">
+
+                <button class="btn btn-light rounded-pill">
+
+                    <i class="bi bi-search"></i>
+
+                </button>
+
+            </form>
+
+            <!-- RIGHT -->
+
+            <ul class="navbar-nav align-items-center">
+
+                <li class="nav-item"
+                    sec:authorize="!isAuthenticated()">
+
+                    <a href="/login"
+                       class="btn btn-outline-light rounded-pill px-4">
+
+                        Đăng nhập
+
+                    </a>
+
+                </li>
+
+                <li class="nav-item dropdown"
+                    sec:authorize="isAuthenticated()">
+
+                    <a class="nav-link dropdown-toggle text-white"
+                       href="#"
+                       data-bs-toggle="dropdown">
+
+                        👋 <span sec:authentication="name"></span>
+
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-end">
+
+                        <li>
+                            <a class="dropdown-item"
+                               href="/profile">
+
+                                <i class="bi bi-person-circle me-2"></i>
+
+                                Thông tin cá nhân
+
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item"
+                               href="/orders">
+
+                                <i class="bi bi-bag-check me-2"></i>
+
+                                Đơn hàng
+
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item"
+                               href="/cart">
+
+                                <i class="bi bi-cart3 me-2"></i>
+
+                                Giỏ hàng
+
+                            </a>
+                        </li>
+
+                        <li><hr class="dropdown-divider"></li>
+
+                        <li>
+                            <a class="dropdown-item text-danger"
+                               href="/logout">
+
+                                <i class="bi bi-box-arrow-right me-2"></i>
+
+                                Đăng xuất
+
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </li>
+
+                <li class="nav-item ms-3"
+                    sec:authorize="isAuthenticated()">
+
+                    <a href="/cart"
+                       class="btn btn-danger rounded-pill position-relative navbar-icon-btn">
+
+                        <i class="bi bi-cart3"></i>
+
+                    </a>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
+
+<!-- ================= HEADER ================= -->
+
+<div class="page-header">
+
+    <h1>
+        Ưu đãi & Quảng cáo
+    </h1>
+
+    <p>
+        Khám phá các chương trình khuyến mãi nổi bật từ G7 Fashion
+    </p>
+
+</div>
+
+<!-- ================= ADS ================= -->
+
+<div class="container ads-section">
+
+    <!-- EMPTY -->
+
+    <div th:if="${#lists.isEmpty(ads)}"
+         class="empty-box">
+
+        <i class="fa-solid fa-image"></i>
+
+        <h3>
+            Chưa có quảng cáo nào
+        </h3>
+
+        <p>
+            Hiện chưa có chương trình quảng cáo hoặc ưu đãi.
+        </p>
+
+    </div>
+
+    <!-- ADS LIST -->
+
+    <div class="row g-4"
+         th:if="${!#lists.isEmpty(ads)}">
+
+        <div class="col-lg-4 col-md-6"
+             th:each="a : ${ads}">
+
+            <div class="card ads-card">
+
+                <!-- IMAGE -->
+
+                <img th:if="${a.image != null}"
+                     th:src="@{/uploads/{img}(img=${a.image})}"
+                     class="ads-image">
+
+                <!-- CONTENT -->
+
+                <div class="ads-content">
+
+                    <div class="ads-position"
+                         th:text="${a.position}">
+                    </div>
+
+                    <h3 class="ads-title"
+                        th:text="${a.name}">
+                    </h3>
+
+                    <div class="ads-date">
+
+                        <i class="fa-regular fa-calendar"></i>
+
+                        <span th:text="${#dates.format(a.startdate,'dd/MM/yyyy')}"></span>
+
+                        -
+
+                        <span th:text="${#dates.format(a.enddate,'dd/MM/yyyy')}"></span>
+
+                    </div>
+
+                    <a th:href="${a.linkurl}"
+                       class="ads-btn"
+                       target="_blank">
+
+                        Xem ngay
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+    <div class="container">
+
+        <div class="row g-4">
+
+            <div class="col-lg-4">
+
+                <h5 class="footer-title">
+                    🛍 G7 Fashion
+                </h5>
+
+                <p>
+                    Thời trang nam hiện đại, trẻ trung và đẳng cấp.
+                </p>
+
+                <div class="social-icons mt-4">
+
+                    <a href="#">
+                        <i class="bi bi-facebook"></i>
+                    </a>
+
+                    <a href="#">
+                        <i class="bi bi-instagram"></i>
+                    </a>
+
+                    <a href="#">
+                        <i class="bi bi-tiktok"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-4">
+
+                <h5 class="footer-title">
+                    Liên hệ
+                </h5>
+
+                <p>📞 0964 942 121</p>
+
+                <p>📧 g7fashion@gmail.com</p>
+
+                <p>📍 Hà Nội, Việt Nam</p>
+
+            </div>
+
+            <div class="col-lg-4">
+
+                <h5 class="footer-title">
+                    Danh mục
+                </h5>
+
+                <a href="/products">Sản phẩm</a>
+
+                <a href="/sale">Sale</a>
+
+                <a href="/advertisement">Quảng cáo</a>
+
+            </div>
+
+        </div>
+
+        <hr class="border-secondary mt-5">
+
+        <div class="text-center pb-4">
+
+            © 2026 G7 Fashion - All Rights Reserved
+
+        </div>
+
+    </div>
+
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

@@ -1,12 +1,14 @@
 package G7_TTN.controller.user;
 
 import G7_TTN.entity.Product;
+
 import G7_TTN.reponsitory.CategoryRepository;
 import G7_TTN.reponsitory.ProductRepository;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -24,6 +26,7 @@ public class UserController {
     ) {
 
         this.productRepo = productRepo;
+
         this.categoryRepo = categoryRepo;
     }
 
@@ -32,6 +35,8 @@ public class UserController {
     @GetMapping
     public String home(Model model) {
 
+        // ================= PRODUCTS =================
+
         List<Product> products =
                 productRepo.findAll();
 
@@ -39,6 +44,8 @@ public class UserController {
                 "products",
                 products
         );
+
+        // ================= CATEGORY =================
 
         model.addAttribute(
                 "categories",

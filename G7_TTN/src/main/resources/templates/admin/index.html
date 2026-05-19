@@ -3,188 +3,645 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
+
     <meta charset="UTF-8">
-    <title>Admin Dashboard | G7 Fashion</title>
 
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>
+        Dashboard | G7 Fashion
+    </title>
 
-    <!-- Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <!-- BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- BOOTSTRAP ICON -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- CHART JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- FONT -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
 
     <style>
-        body {
-            background: #f5f6fa;
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins',sans-serif;
         }
 
-        /* SIDEBAR */
-        .sidebar {
-            width: 240px;
-            height: 100vh;
-            position: fixed;
-            background: #111;
-            color: #fff;
-            padding-top: 20px;
+        body{
+            background:#f5f6fa;
         }
 
-        .sidebar a {
-            display: block;
-            color: #ccc;
-            padding: 12px 20px;
-            text-decoration: none;
-            transition: 0.3s;
+        /* ================= SIDEBAR ================= */
+
+        .sidebar{
+            width:240px;
+            height:100vh;
+
+            position:fixed;
+            top:0;
+            left:0;
+
+            background:#111;
+
+            padding-top:25px;
+
+            overflow-y:auto;
         }
 
-        .sidebar a:hover {
-            background: #222;
-            color: #fff;
+        .logo{
+            color:#fff;
+            text-align:center;
+            font-size:28px;
+            font-weight:700;
+            margin-bottom:35px;
         }
 
-        .sidebar .active {
-            background: #0d6efd;
-            color: #fff;
+        .sidebar a{
+            display:flex;
+            align-items:center;
+            gap:12px;
+            padding:14px 22px;
+            color:#ccc;
+            text-decoration:none;
+            transition:0.3s;
         }
 
-        /* CONTENT */
-        .content {
-            margin-left: 240px;
-            padding: 30px;
+        .sidebar a:hover{
+            background:#1e1e1e;
+            color:#fff;
         }
 
-        .card {
-            border: none;
-            border-radius: 15px;
-            transition: 0.3s;
+        .sidebar .active{
+            background:#0d6efd;
+            color:#fff;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        /* ================= CONTENT ================= */
+
+        .content{
+            margin-left:240px;
+            padding:30px;
         }
 
-        .topbar {
-            background: #fff;
-            padding: 15px 20px;
-            border-radius: 12px;
-            margin-bottom: 20px;
+        /* ================= TOPBAR ================= */
+
+        .topbar{
+            background:#fff;
+            padding:20px 25px;
+            border-radius:20px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            margin-bottom:30px;
+            box-shadow:0 5px 20px rgba(0,0,0,0.05);
         }
+
+        .topbar h4{
+            font-weight:700;
+            margin:0;
+        }
+
+        /* ================= CARD ================= */
+
+        .dashboard-card{
+            background:#fff;
+            border-radius:22px;
+            padding:25px;
+            height:100%;
+            box-shadow:0 5px 20px rgba(0,0,0,0.05);
+            transition:0.3s;
+        }
+
+        .dashboard-card:hover{
+            transform:translateY(-5px);
+        }
+
+        .icon-box{
+            width:60px;
+            height:60px;
+            border-radius:18px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            color:#fff;
+            font-size:28px;
+            margin-bottom:18px;
+        }
+
+        .bg-blue{
+            background:#0d6efd;
+        }
+
+        .bg-green{
+            background:#198754;
+        }
+
+        .bg-orange{
+            background:#fd7e14;
+        }
+
+        .bg-red{
+            background:#dc3545;
+        }
+
+        .bg-dark-custom{
+            background:#111827;
+        }
+
+        .bg-purple{
+            background:#6f42c1;
+        }
+
+        .dashboard-card h3{
+            font-weight:700;
+            margin-bottom:5px;
+        }
+
+        .dashboard-card p{
+            color:#777;
+            margin:0;
+        }
+
+        /* ================= CHART ================= */
+
+        .chart-box{
+            background:#fff;
+            border-radius:22px;
+            padding:25px;
+            margin-top:30px;
+            box-shadow:0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .chart-title{
+            font-weight:700;
+            margin-bottom:25px;
+        }
+
+        /* ================= QUICK MENU ================= */
+
+        .quick-box{
+            background:#fff;
+            border-radius:22px;
+            padding:25px;
+            margin-top:30px;
+            box-shadow:0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .quick-btn{
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            gap:10px;
+            text-decoration:none;
+            border-radius:16px;
+            padding:18px;
+            font-weight:600;
+            color:#111;
+            background:#f8f9fa;
+            transition:0.3s;
+        }
+
+        .quick-btn:hover{
+            background:#0d6efd;
+            color:#fff;
+            transform:translateY(-3px);
+        }
+
+        @media(max-width:992px){
+
+            .sidebar{
+                width:100%;
+                height:auto;
+                position:relative;
+            }
+
+            .content{
+                margin-left:0;
+            }
+        }
+
     </style>
+
 </head>
 
 <body>
 
-<!-- SIDEBAR -->
+<!-- ================= SIDEBAR ================= -->
+
 <div class="sidebar">
-    <h4 class="text-center mb-4">⚙ ADMIN</h4>
+
+    <div class="logo">
+        ⚙ G7 ADMIN
+    </div>
 
     <a href="/admin" class="active">
-        <i class="bi bi-speedometer2"></i> Dashboard
+        <i class="fa-solid fa-chart-line"></i>
+        Dashboard
     </a>
 
     <a href="/admin/products">
-        <i class="bi bi-box"></i> Sản phẩm
+        <i class="fa-solid fa-box"></i>
+        Sản phẩm
     </a>
 
-    <a href="/admin/categories">
-        <i class="bi bi-tags"></i> Danh mục
+    <a href="/admin/category">
+        <i class="fa-solid fa-layer-group"></i>
+        Danh mục
     </a>
 
     <a href="/admin/orders">
-        <i class="bi bi-receipt"></i> Đơn hàng
+        <i class="fa-solid fa-cart-shopping"></i>
+        Đơn hàng
+    </a>
+
+    <a href="/admin/users">
+        <i class="fa-solid fa-users"></i>
+        Người dùng
+    </a>
+
+    <a href="/admin/advertisement">
+        <i class="fa-solid fa-image"></i>
+        Quảng cáo
     </a>
 
     <a href="/user">
-        <i class="bi bi-house"></i> Trang user
+        <i class="fa-solid fa-house"></i>
+        Trang user
     </a>
 
-    <hr>
+    <hr class="text-secondary">
 
     <a href="/logout" class="text-danger">
-        <i class="bi bi-box-arrow-right"></i> Đăng xuất
+        <i class="fa-solid fa-right-from-bracket"></i>
+        Đăng xuất
     </a>
+
 </div>
 
-<!-- CONTENT -->
+<!-- ================= CONTENT ================= -->
+
 <div class="content">
 
     <!-- TOPBAR -->
-    <div class="topbar d-flex justify-content-between align-items-center">
 
-        <h5>Dashboard</h5>
+    <div class="topbar">
 
         <div>
+
+            <h4>
+                Dashboard
+            </h4>
+
+            <small class="text-muted">
+                Tổng quan hệ thống G7 Fashion
+            </small>
+
+        </div>
+
+        <div>
+
             👋 Xin chào,
-            <b sec:authentication="name"></b>
+            <strong sec:authentication="name"></strong>
+
         </div>
 
     </div>
 
-    <!-- STATS -->
-    <div class="row">
+    <!-- ================= STATISTICS ================= -->
 
-        <div class="col-md-3 mb-4">
-            <div class="card p-3 text-center">
-                <h4 th:text="${totalProducts}">0</h4>
-                <p>Tổng sản phẩm</p>
+    <div class="row g-4">
+
+        <!-- REVENUE -->
+
+        <div class="col-lg-3 col-md-6">
+
+            <div class="dashboard-card">
+
+                <div class="icon-box bg-red">
+                    <i class="fa-solid fa-money-bill-trend-up"></i>
+                </div>
+
+                <h3>
+
+                    <span th:text="${#numbers.formatDecimal(
+                    totalRevenue,
+                    0,
+                    'COMMA',
+                    0,
+                    'POINT')}">
+                    </span>
+
+                    VNĐ
+
+                </h3>
+
+                <p>
+                    Tổng doanh thu
+                </p>
+
             </div>
+
         </div>
 
-        <div class="col-md-3 mb-4">
-            <div class="card p-3 text-center">
-                <h4 th:text="${#lists.size(categories)}">0</h4>
-                <p>Danh mục</p>
-            </div>
-        </div>
+        <!-- PRODUCTS -->
 
-        <!-- FIX ĐƠN HÀNG -->
-        <div class="col-md-3 mb-4">
-            <div class="card p-3 text-center">
+        <div class="col-lg-3 col-md-6">
 
-                <h4 th:text="${totalOrders != null ? totalOrders : 0}">
+            <div class="dashboard-card">
+
+                <div class="icon-box bg-blue">
+                    <i class="fa-solid fa-box"></i>
+                </div>
+
+                <h3 th:text="${totalProducts}">
                     0
-                </h4>
+                </h3>
 
-                <p>Đơn hàng</p>
+                <p>
+                    Tổng sản phẩm
+                </p>
 
             </div>
+
         </div>
 
-        <!-- FIX DOANH THU -->
-        <div class="col-md-3 mb-4">
-            <div class="card p-3 text-center">
+        <!-- ORDERS -->
 
-                <h4 th:text="${totalRevenue != null ? totalRevenue : 0}">
+        <div class="col-lg-3 col-md-6">
+
+            <div class="dashboard-card">
+
+                <div class="icon-box bg-orange">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </div>
+
+                <h3 th:text="${totalOrders}">
                     0
-                </h4>
+                </h3>
 
-                <p>Doanh thu</p>
+                <p>
+                    Tổng đơn hàng
+                </p>
 
             </div>
+
+        </div>
+
+        <!-- USERS -->
+
+        <div class="col-lg-3 col-md-6">
+
+            <div class="dashboard-card">
+
+                <div class="icon-box bg-green">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+
+                <h3 th:text="${totalUsers}">
+                    0
+                </h3>
+
+                <p>
+                    Người dùng
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- CATEGORY -->
+
+        <div class="col-lg-3 col-md-6">
+
+            <div class="dashboard-card">
+
+                <div class="icon-box bg-purple">
+                    <i class="fa-solid fa-layer-group"></i>
+                </div>
+
+                <h3 th:text="${totalCategory}">
+                    0
+                </h3>
+
+                <p>
+                    Danh mục
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- ADS -->
+
+        <div class="col-lg-3 col-md-6">
+
+            <div class="dashboard-card">
+
+                <div class="icon-box bg-dark-custom">
+                    <i class="fa-solid fa-image"></i>
+                </div>
+
+                <h3 th:text="${totalAds}">
+                    0
+                </h3>
+
+                <p>
+                    Quảng cáo
+                </p>
+
+            </div>
+
         </div>
 
     </div>
 
-    <!-- QUICK ACTION -->
-    <div class="mt-4">
+    <!-- ================= QUICK ACCESS ================= -->
 
-        <a href="/admin/products"
-           class="btn btn-dark">
+    <div class="quick-box">
 
-            📦 Quản lý sản phẩm
+        <h5 class="chart-title">
+            ⚡ Truy cập nhanh
+        </h5>
 
-        </a>
+        <div class="row g-3">
 
-        <!-- FIX LINK -->
-        <a href="/admin/products/create"
-           class="btn btn-success">
+            <div class="col-lg-3 col-md-6">
 
-            ➕ Thêm sản phẩm
+                <a href="/admin/products/create"
+                   class="quick-btn">
 
-        </a>
+                    <i class="fa-solid fa-plus"></i>
+                    Thêm sản phẩm
+
+                </a>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <a href="/admin/category/create"
+                   class="quick-btn">
+
+                    <i class="fa-solid fa-folder-plus"></i>
+                    Thêm danh mục
+
+                </a>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <a href="/admin/orders"
+                   class="quick-btn">
+
+                    <i class="fa-solid fa-receipt"></i>
+                    Quản lý đơn
+
+                </a>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <a href="/admin/users"
+                   class="quick-btn">
+
+                    <i class="fa-solid fa-user"></i>
+                    Người dùng
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ================= CHART ================= -->
+
+    <div class="chart-box">
+
+        <h5 class="chart-title">
+            📈 Thống kê doanh thu theo tháng
+        </h5>
+
+        <canvas id="revenueChart"
+                height="100">
+        </canvas>
 
     </div>
 
 </div>
+
+<!-- ================= CHART JS ================= -->
+
+<script th:inline="javascript">
+
+    const monthData = [
+
+        [[${month1}]],
+        [[${month2}]],
+        [[${month3}]],
+        [[${month4}]],
+        [[${month5}]],
+        [[${month6}]],
+        [[${month7}]],
+        [[${month8}]],
+        [[${month9}]],
+        [[${month10}]],
+        [[${month11}]],
+        [[${month12}]]
+
+    ];
+
+    const ctx =
+        document.getElementById('revenueChart');
+
+    new Chart(ctx, {
+
+        type: 'bar',
+
+        data: {
+
+            labels: [
+                'T1','T2','T3','T4','T5','T6',
+                'T7','T8','T9','T10','T11','T12'
+            ],
+
+            datasets: [{
+
+                label: 'Doanh thu (VNĐ)',
+
+                data: monthData,
+
+                backgroundColor: [
+                    '#0d6efd',
+                    '#198754',
+                    '#fd7e14',
+                    '#dc3545',
+                    '#6f42c1',
+                    '#20c997',
+                    '#ffc107',
+                    '#6610f2',
+                    '#0dcaf0',
+                    '#d63384',
+                    '#198754',
+                    '#343a40'
+                ],
+
+                borderRadius: 10,
+                borderWidth: 1
+
+            }]
+
+        },
+
+        options: {
+
+            responsive: true,
+
+            plugins: {
+
+                legend: {
+                    display: true
+                }
+
+            },
+
+            scales: {
+
+                y: {
+
+                    beginAtZero: true,
+
+                    ticks: {
+
+                        callback: function(value) {
+                            return value.toLocaleString('vi-VN') + 'đ';
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    });
+
+</script>
 
 </body>
 </html>

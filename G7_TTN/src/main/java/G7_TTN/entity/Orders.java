@@ -38,4 +38,6 @@ public class Orders {
     @ManyToOne
     @JoinColumn(name = "idtransport")
     private Transport_method transport;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updateddate;
 }

@@ -7,8 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import jakarta.annotation.PostConstruct;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -23,62 +22,115 @@ public class UserService implements UserDetailsService {
 
     // ================= LOGIN =================
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) {
 
         Users user = userRepo.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("Không tồn tại"));
+                .orElseThrow(() -> new UsernameNotFoundException("Không tồn tại tài khoản"));
+
+        if (user.getIsdelete() != null && user.getIsdelete() == 1) {
+            throw new UsernameNotFoundException("Tài khoản đã bị xóa");
+        }
+
+        if (user.getIsactive() != null && user.getIsactive() == 0) {
+            throw new UsernameNotFoundException("Tài khoản đã bị khóa");
+        }
+
+        String role = (user.getRole() == null) ? "USER" : user.getRole();
 
         return new org.springframework.security.core.userdetails.User(
                 user.getUsername(),
                 user.getPassword(),
-                List.of(() -> "ROLE_" + user.getRole())
+                true, true, true, true,
+                List.of(() -> "ROLE_" + role)
         );
     }
 
     // ================= REGISTER =================
     public String register(Users user) {
 
+        // VALIDATION
+        if (user.getUsername() == null || user.getUsername().isBlank()) {
+            return "Username không được để trống";
+        }
+
+        if (user.getPassword() == null || user.getPassword().isBlank()) {
+            return "Password không được để trống";
+        }
+
         if (userRepo.existsByUsername(user.getUsername())) {
             return "Username đã tồn tại";
         }
 
+        if (user.getEmail() != null && !user.getEmail().isBlank()
+                && userRepo.existsByEmail(user.getEmail())) {
+            return "Email đã tồn tại";
+        }
+
+        // SET DATA
         user.setPassword(encoder.encode(user.getPassword()));
         user.setRole("USER");
         user.setIsactive(1);
         user.setIsdelete(0);
-
         user.setCreateddate(new Date());
         user.setUpdateddate(new Date());
 
-        userRepo.save(user);
+        userRepo.save(user); // ⭐ INSERT DB
 
         return "OK";
     }
 
-    // ================= FIND =================
-    public Users findByUsername(String username) {
-        return userRepo.findByUsername(username).orElse(null);
+    // ================= ADMIN SAVE =================
+    public void save(Users user) {
+
+        if (user.getId() == null) {
+
+            user.setPassword(encoder.encode(user.getPassword()));
+            user.setCreateddate(new Date());
+            user.setIsactive(1);
+            user.setIsdelete(0);
+
+        } else {
+
+            Users old = userRepo.findById(user.getId())
+                    .orElseThrow(() -> new RuntimeException("User not found"));
+
+            user.setCreateddate(old.getCreateddate());
+
+            if (user.getPassword() == null || user.getPassword().isBlank()) {
+                user.setPassword(old.getPassword());
+            } else {
+                user.setPassword(encoder.encode(user.getPassword()));
+            }
+
+            if (user.getIsactive() == null) user.setIsactive(old.getIsactive());
+            if (user.getIsdelete() == null) user.setIsdelete(old.getIsdelete());
+        }
+
+        user.setUpdateddate(new Date());
+        userRepo.save(user);
     }
 
-    // ================= CREATE ADMIN AUTO =================
-    @PostConstruct
-    public void createAdmin() {
+    public void delete(Long id) {
+        userRepo.findById(id).ifPresent(u -> {
+            u.setIsdelete(1);
+            u.setUpdateddate(new Date());
+            userRepo.save(u);
+        });
+    }
 
-        if (userRepo.findByUsername("admin").isEmpty()) {
+    public void lock(Long id) {
+        userRepo.findById(id).ifPresent(u -> {
+            u.setIsactive(0);
+            u.setUpdateddate(new Date());
+            userRepo.save(u);
+        });
+    }
 
-            Users admin = new Users();
-            admin.setUsername("admin");
-            admin.setPassword(encoder.encode("123456"));
-            admin.setName("Admin");
-            admin.setRole("ADMIN");
-            admin.setIsactive(1);
-            admin.setIsdelete(0);
-            admin.setCreateddate(new Date());
-            admin.setUpdateddate(new Date());
-
-            userRepo.save(admin);
-
-            System.out.println(">>> Admin created");
-        }
+    public void unlock(Long id) {
+        userRepo.findById(id).ifPresent(u -> {
+            u.setIsactive(1);
+            u.setUpdateddate(new Date());
+            userRepo.save(u);
+        });
     }
 }

@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Đổi mật khẩu | G7 Fashion</title>
+
+    <!-- BOOTSTRAP -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <!-- FONT -->
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- ICON -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            font-family:'Poppins',sans-serif;
+            background:#f5f7fb;
+        }
+
+        a{
+            text-decoration:none;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar{
+            background:#111827;
+            padding:14px 0;
+            box-shadow:0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .navbar-brand{
+            color:#fff !important;
+            font-size:28px;
+            font-weight:700;
+        }
+
+        .nav-link{
+            color:#ddd !important;
+            margin:0 10px;
+            transition:0.3s;
+            position:relative;
+        }
+
+        .nav-link:hover{
+            color:#fff !important;
+        }
+
+        .nav-link::after{
+            content:'';
+            position:absolute;
+            left:0;
+            bottom:-4px;
+            width:0;
+            height:2px;
+            background:#dc3545;
+            transition:0.3s;
+        }
+
+        .nav-link:hover::after{
+            width:100%;
+        }
+
+        /* ================= PAGE ================= */
+
+        .page-wrapper{
+            min-height:100vh;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            padding:60px 20px;
+        }
+
+        .change-box{
+            width:100%;
+            max-width:520px;
+            background:#fff;
+            border-radius:30px;
+            padding:45px;
+            box-shadow:0 10px 35px rgba(0,0,0,0.08);
+        }
+
+        .change-header{
+            text-align:center;
+            margin-bottom:35px;
+        }
+
+        .change-icon{
+            width:90px;
+            height:90px;
+            background:#111827;
+            color:#fff;
+            border-radius:50%;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:38px;
+            margin:auto;
+            margin-bottom:20px;
+        }
+
+        .change-title{
+            font-size:32px;
+            font-weight:700;
+            margin-bottom:10px;
+        }
+
+        .change-subtitle{
+            color:#777;
+            font-size:15px;
+        }
+
+        /* ================= FORM ================= */
+
+        .form-label{
+            font-weight:600;
+            margin-bottom:10px;
+        }
+
+        .form-control{
+            height:55px;
+            border-radius:16px;
+            border:1px solid #ddd;
+            padding-left:18px;
+            font-size:15px;
+        }
+
+        .form-control:focus{
+            box-shadow:none;
+            border-color:#111827;
+        }
+
+        .input-group-text{
+            border-radius:16px 0 0 16px;
+            background:#111827;
+            color:#fff;
+            border:none;
+            width:55px;
+            justify-content:center;
+        }
+
+        .input-group .form-control{
+            border-radius:0 16px 16px 0;
+        }
+
+        /* ================= BUTTON ================= */
+
+        .save-btn{
+            width:100%;
+            height:55px;
+            border:none;
+            border-radius:50px;
+            background:#dc3545;
+            color:#fff;
+            font-weight:600;
+            font-size:16px;
+            transition:0.3s;
+        }
+
+        .save-btn:hover{
+            background:#bb2d3b;
+            transform:translateY(-2px);
+        }
+
+        /* ================= ALERT ================= */
+
+        .alert{
+            border-radius:18px;
+            border:none;
+            padding:14px 18px;
+            font-size:14px;
+        }
+
+        /* ================= BACK ================= */
+
+        .back-link{
+            display:inline-flex;
+            align-items:center;
+            gap:10px;
+            margin-top:20px;
+            color:#111827;
+            font-weight:600;
+        }
+
+        .back-link:hover{
+            color:#dc3545;
+        }
+
+        @media(max-width:768px){
+
+            .change-box{
+                padding:35px 25px;
+            }
+
+            .change-title{
+                font-size:26px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar navbar-expand-lg navbar-dark">
+
+    <div class="container">
+
+        <a class="navbar-brand"
+           href="/user">
+
+            🛍 G7 Fashion
+
+        </a>
+
+        <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#nav">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+        <div class="collapse navbar-collapse"
+             id="nav">
+
+            <ul class="navbar-nav ms-4">
+
+                <li class="nav-item">
+                    <a href="/user"
+                       class="nav-link">
+
+                        Trang chủ
+
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/products"
+                       class="nav-link">
+
+                        Sản phẩm
+
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/sale"
+                       class="nav-link">
+
+                        Sale
+
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/advertisement"
+                       class="nav-link">
+
+                        Quảng cáo
+
+                    </a>
+                </li>
+
+            </ul>
+
+            <ul class="navbar-nav ms-auto align-items-center">
+
+                <li class="nav-item me-3"
+                    sec:authorize="isAuthenticated()">
+
+                    <span class="text-white">
+
+                        👋 <span sec:authentication="name"></span>
+
+                    </span>
+
+                </li>
+
+                <li class="nav-item">
+
+                    <a href="/profile"
+                       class="btn btn-outline-light rounded-pill px-4">
+
+                        Hồ sơ
+
+                    </a>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
+
+<!-- ================= PAGE ================= -->
+
+<div class="page-wrapper">
+
+    <div class="change-box">
+
+        <!-- HEADER -->
+
+        <div class="change-header">
+
+            <div class="change-icon">
+
+                <i class="fa-solid fa-lock"></i>
+
+            </div>
+
+            <h1 class="change-title">
+
+                Đổi mật khẩu
+
+            </h1>
+
+            <p class="change-subtitle">
+
+                Cập nhật mật khẩu mới để bảo vệ tài khoản của bạn
+
+            </p>
+
+        </div>
+
+        <!-- SUCCESS -->
+
+        <div th:if="${param.success}"
+             class="alert alert-success">
+
+            <i class="fa-solid fa-circle-check me-2"></i>
+
+            Đổi mật khẩu thành công
+
+        </div>
+
+        <!-- OLD PASSWORD ERROR -->
+
+        <div th:if="${param.errorOld}"
+             class="alert alert-danger">
+
+            <i class="fa-solid fa-circle-exclamation me-2"></i>
+
+            Mật khẩu cũ không chính xác
+
+        </div>
+
+        <!-- CONFIRM ERROR -->
+
+        <div th:if="${param.errorConfirm}"
+             class="alert alert-warning">
+
+            <i class="fa-solid fa-triangle-exclamation me-2"></i>
+
+            Xác nhận mật khẩu không khớp
+
+        </div>
+
+        <!-- FORM -->
+
+        <form action="/change-password"
+              method="post">
+
+            <!-- OLD PASSWORD -->
+
+            <div class="mb-4">
+
+                <label class="form-label">
+
+                    Mật khẩu cũ
+
+                </label>
+
+                <div class="input-group">
+
+                    <span class="input-group-text">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                    </span>
+
+                    <input type="password"
+                           name="oldPassword"
+                           class="form-control"
+                           placeholder="Nhập mật khẩu cũ"
+                           required>
+
+                </div>
+
+            </div>
+
+            <!-- NEW PASSWORD -->
+
+            <div class="mb-4">
+
+                <label class="form-label">
+
+                    Mật khẩu mới
+
+                </label>
+
+                <div class="input-group">
+
+                    <span class="input-group-text">
+
+                        <i class="fa-solid fa-key"></i>
+
+                    </span>
+
+                    <input type="password"
+                           name="newPassword"
+                           class="form-control"
+                           placeholder="Nhập mật khẩu mới"
+                           required>
+
+                </div>
+
+            </div>
+
+            <!-- CONFIRM PASSWORD -->
+
+            <div class="mb-4">
+
+                <label class="form-label">
+
+                    Xác nhận mật khẩu
+
+                </label>
+
+                <div class="input-group">
+
+                    <span class="input-group-text">
+
+                        <i class="fa-solid fa-shield-halved"></i>
+
+                    </span>
+
+                    <input type="password"
+                           name="confirmPassword"
+                           class="form-control"
+                           placeholder="Nhập lại mật khẩu"
+                           required>
+
+                </div>
+
+            </div>
+
+            <!-- BUTTON -->
+
+            <button type="submit"
+                    class="save-btn">
+
+                <i class="fa-solid fa-floppy-disk me-2"></i>
+
+                Cập nhật mật khẩu
+
+            </button>
+
+        </form>
+
+        <!-- BACK -->
+
+        <div class="text-center">
+
+            <a href="/profile"
+               class="back-link">
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Quay lại hồ sơ
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- BOOTSTRAP -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

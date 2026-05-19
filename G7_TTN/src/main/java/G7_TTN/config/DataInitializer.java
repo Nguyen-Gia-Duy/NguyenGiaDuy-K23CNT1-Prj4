@@ -21,35 +21,25 @@ public class DataInitializer {
     @PostConstruct
     public void initData() {
 
-        // ===== ADMIN =====
-        Users admin = userRepo.findByUsername("admin").orElse(null);
-
-        if (admin == null) {
-            admin = new Users();
+        if (userRepo.findByUsername("admin").isEmpty()) {
+            Users admin = new Users();
             admin.setUsername("admin");
             admin.setName("Admin");
             admin.setRole("ADMIN");
             admin.setIsactive(1);
+            admin.setIsdelete(0);
+            admin.setPassword(encoder.encode("123"));
+            userRepo.save(admin);
         }
 
-        admin.setPassword(encoder.encode("123"));
-        userRepo.save(admin);
-
-
-        // ===== USER =====
-        Users user = userRepo.findByUsername("user").orElse(null);
-
-        if (user == null) {
-            user = new Users();
+        if (userRepo.findByUsername("user").isEmpty()) {
+            Users user = new Users();
             user.setUsername("user");
             user.setName("User");
             user.setRole("USER");
             user.setIsactive(1);
+            user.setIsdelete(0);
+            user.setPassword(encoder.encode("123"));
+            userRepo.save(user);
         }
-
-        user.setPassword(encoder.encode("123"));
-        userRepo.save(user);
-
-        System.out.println("✅ Data initialized");
-    }
-}
+    }}

@@ -5,6 +5,8 @@
 <head>
 
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>SALE | G7 Fashion</title>
 
     <!-- BOOTSTRAP -->
@@ -27,21 +29,48 @@
             box-sizing:border-box;
         }
 
+        html{
+            scroll-behavior:smooth;
+        }
+
         body{
             font-family:'Poppins',sans-serif;
             background:#f5f5f5;
             overflow-x:hidden;
+            color:#222;
         }
 
         a{
             text-decoration:none;
         }
 
+        .container{
+            max-width:1320px;
+        }
+
+        /* ================= TOPBAR ================= */
+
+        .topbar{
+            background:#000;
+            color:#ccc;
+            font-size:13px;
+            padding:8px 0;
+        }
+
+        .topbar .container{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            flex-wrap:wrap;
+        }
+
         /* ================= NAVBAR ================= */
 
         .navbar{
-            background:linear-gradient(90deg,#111,#222);
+            background:rgba(17,17,17,0.96);
+            backdrop-filter:blur(10px);
             padding:14px 0;
+            box-shadow:0 5px 20px rgba(0,0,0,0.08);
         }
 
         .navbar-brand{
@@ -52,9 +81,10 @@
 
         .nav-link{
             color:#ddd !important;
-            margin:0 8px;
+            margin:0 10px;
             position:relative;
             font-weight:500;
+            transition:0.3s;
         }
 
         .nav-link:hover{
@@ -65,7 +95,7 @@
             content:'';
             position:absolute;
             left:0;
-            bottom:-3px;
+            bottom:-4px;
             width:0;
             height:2px;
             background:#fff;
@@ -76,11 +106,33 @@
             width:100%;
         }
 
+        .search-box{
+            background:#fff;
+            border-radius:50px;
+            overflow:hidden;
+            padding:4px;
+        }
+
+        .search-box input{
+            border:none;
+            box-shadow:none !important;
+            padding-left:15px;
+        }
+
+        .search-btn{
+            width:42px;
+            height:42px;
+            border:none;
+            border-radius:50%;
+            background:#111;
+            color:#fff;
+        }
+
         /* ================= HERO ================= */
 
         .sale-banner{
 
-            height:430px;
+            height:520px;
 
             background:
                     linear-gradient(rgba(0,0,0,0.55),
@@ -96,11 +148,14 @@
 
             text-align:center;
             color:#fff;
+
+            position:relative;
         }
 
         .sale-banner h1{
-            font-size:70px;
+            font-size:72px;
             font-weight:700;
+            letter-spacing:1px;
         }
 
         .sale-banner p{
@@ -109,31 +164,61 @@
             margin-top:15px;
         }
 
-        /* ================= TOP INFO ================= */
+        .hero-btn{
+            padding:14px 36px;
+            border-radius:50px;
+            font-weight:600;
+        }
 
-        .top-info{
-            margin-top:-50px;
+        /* ================= COUNTDOWN ================= */
+
+        .countdown-box{
+            margin-top:-60px;
             position:relative;
             z-index:10;
         }
 
+        .countdown-card{
+            background:#fff;
+            border-radius:30px;
+            padding:35px;
+            box-shadow:0 10px 35px rgba(0,0,0,0.08);
+        }
+
+        .countdown-item{
+            text-align:center;
+        }
+
+        .countdown-number{
+            font-size:36px;
+            font-weight:700;
+            color:#dc3545;
+        }
+
+        .countdown-text{
+            color:#777;
+            font-size:14px;
+        }
+
+        /* ================= INFO ================= */
+
         .info-box{
             background:#fff;
-            padding:25px;
+            padding:30px 25px;
             border-radius:25px;
             text-align:center;
-            box-shadow:0 10px 30px rgba(0,0,0,0.08);
+            box-shadow:0 10px 30px rgba(0,0,0,0.06);
             transition:0.3s;
             height:100%;
         }
 
         .info-box:hover{
-            transform:translateY(-5px);
+            transform:translateY(-8px);
         }
 
         .info-icon{
-            width:70px;
-            height:70px;
+            width:75px;
+            height:75px;
 
             background:#111;
             color:#fff;
@@ -145,9 +230,46 @@
             justify-content:center;
 
             margin:auto;
-            margin-bottom:15px;
+            margin-bottom:18px;
 
-            font-size:28px;
+            font-size:30px;
+        }
+
+        /* ================= FILTER ================= */
+
+        .filter-box{
+            background:#fff;
+            border-radius:24px;
+            padding:25px;
+            margin-bottom:25px;
+            box-shadow:0 8px 25px rgba(0,0,0,0.06);
+        }
+
+        .filter-title{
+            font-size:20px;
+            font-weight:700;
+            margin-bottom:20px;
+        }
+
+        .category-link{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+
+            padding:14px 18px;
+            margin-bottom:12px;
+
+            border-radius:14px;
+            background:#f8f8f8;
+
+            color:#333;
+            transition:0.3s;
+        }
+
+        .category-link:hover{
+            background:#111;
+            color:#fff;
+            transform:translateX(5px);
         }
 
         /* ================= PRODUCT ================= */
@@ -155,28 +277,28 @@
         .section-title{
             font-size:38px;
             font-weight:700;
-            margin-bottom:40px;
         }
 
         .product-card{
             border:none;
-            border-radius:25px;
+            border-radius:28px;
             overflow:hidden;
             background:#fff;
             position:relative;
             transition:0.4s;
             height:100%;
-            box-shadow:0 8px 25px rgba(0,0,0,0.06);
+            box-shadow:0 10px 30px rgba(0,0,0,0.06);
         }
 
         .product-card:hover{
             transform:translateY(-10px);
-            box-shadow:0 18px 40px rgba(0,0,0,0.15);
+            box-shadow:0 18px 45px rgba(0,0,0,0.15);
         }
 
         .product-img-box{
             overflow:hidden;
             position:relative;
+            background:#f2f2f2;
         }
 
         .product-img{
@@ -226,12 +348,11 @@
 
         .product-action{
             position:absolute;
-            bottom:15px;
+            bottom:20px;
             left:50%;
             transform:translateX(-50%);
-
             opacity:0;
-            transition:0.3s;
+            transition:0.4s;
         }
 
         .product-card:hover .product-action{
@@ -246,12 +367,14 @@
         .product-name{
             font-size:18px;
             font-weight:600;
-            min-height:54px;
+            min-height:55px;
+            line-height:1.5;
         }
 
         .brand{
             color:#888;
             font-size:14px;
+            margin-top:5px;
         }
 
         .old-price{
@@ -263,13 +386,13 @@
 
         .new-price{
             color:#dc3545;
-            font-size:28px;
+            font-size:30px;
             font-weight:700;
         }
 
         .save-price{
             display:inline-block;
-            margin-top:10px;
+            margin-top:12px;
 
             background:#fff3cd;
             color:#856404;
@@ -281,16 +404,70 @@
             font-weight:600;
         }
 
+        .stock-badge{
+            margin-top:15px;
+            display:inline-block;
+            padding:8px 16px;
+            border-radius:30px;
+            background:#f8f9fa;
+            border:1px solid #ddd;
+            font-size:14px;
+        }
+
+        .buy-btn{
+            width:100%;
+            border:none;
+            border-radius:50px;
+            padding:13px;
+            font-weight:600;
+            transition:0.3s;
+        }
+
         /* ================= CTA ================= */
 
         .cta-banner{
             background:
                     linear-gradient(90deg,#111,#333);
 
-            border-radius:30px;
-            padding:60px;
+            border-radius:35px;
+            padding:70px 50px;
             color:#fff;
             overflow:hidden;
+        }
+
+        /* ================= FEATURE ================= */
+
+        .feature-box{
+            background:#fff;
+            border-radius:25px;
+            padding:35px 25px;
+            text-align:center;
+            box-shadow:0 8px 25px rgba(0,0,0,0.06);
+            transition:0.3s;
+            height:100%;
+        }
+
+        .feature-box:hover{
+            transform:translateY(-8px);
+        }
+
+        .feature-icon{
+            width:75px;
+            height:75px;
+
+            background:#111;
+            color:#fff;
+
+            border-radius:50%;
+
+            display:flex;
+            align-items:center;
+            justify-content:center;
+
+            margin:auto;
+            margin-bottom:20px;
+
+            font-size:28px;
         }
 
         /* ================= FOOTER ================= */
@@ -298,8 +475,8 @@
         .footer{
             background:#111;
             color:#ccc;
-            margin-top:80px;
-            padding-top:60px;
+            margin-top:90px;
+            padding-top:70px;
         }
 
         .footer-title{
@@ -349,10 +526,24 @@
 
         /* ================= RESPONSIVE ================= */
 
+        @media(max-width:992px){
+
+            .sale-banner h1{
+                font-size:54px;
+            }
+
+        }
+
         @media(max-width:768px){
 
+            .topbar .container{
+                justify-content:center;
+                text-align:center;
+                gap:5px;
+            }
+
             .sale-banner{
-                height:320px;
+                height:380px;
                 padding:20px;
             }
 
@@ -360,48 +551,139 @@
                 font-size:42px;
             }
 
+            .sale-banner p{
+                font-size:16px;
+            }
+
+            .section-title{
+                font-size:30px;
+            }
+
+            .product-img{
+                height:250px;
+            }
+
             .cta-banner{
-                padding:35px;
+                padding:40px 25px;
                 text-align:center;
             }
-        }
 
+        }
+/* ================= NAVBAR ================= */
+
+.navbar{
+    background:rgba(17,17,17,0.92)!important;
+    backdrop-filter:blur(10px);
+    padding:14px 0;
+    box-shadow:0 4px 20px rgba(0,0,0,0.08);
+}
+
+.navbar-brand{
+    font-size:30px;
+    font-weight:700;
+    color:#fff !important;
+}
+
+.nav-link{
+    color:#ddd !important;
+    font-weight:500;
+    margin:0 10px;
+    transition:.3s;
+    position:relative;
+}
+
+.nav-link:hover{
+    color:#fff !important;
+}
+
+.nav-link::after{
+    content:'';
+    position:absolute;
+    width:0;
+    height:2px;
+    left:0;
+    bottom:-4px;
+    background:#dc3545;
+    transition:.3s;
+}
+
+.nav-link:hover::after{
+    width:100%;
+}
+
+.search-box{
+    width:260px;
+}
+
+.search-box input{
+    border:none;
+    box-shadow:none !important;
+}
+
+.dropdown-menu{
+    border-radius:18px;
+    border:none;
+    overflow:hidden;
+}
+
+.dropdown-item{
+    padding:12px 18px;
+}
+
+.dropdown-item:hover{
+    background:#f5f5f5;
+}
     </style>
 
 </head>
 
 <body>
 
-<!-- ================= NAVBAR ================= -->
+<!-- ================= TOPBAR ================= -->
 
-<nav class="navbar navbar-expand-lg navbar-dark sticky-top shadow">
+<div class="topbar">
 
     <div class="container">
 
-        <a class="navbar-brand"
-           href="/user">
+        <div>
+            📞 Hotline: 0964 942 121
+        </div>
 
-            🛍 G7 Fashion
+        <div>
+            🚚 Miễn phí vận chuyển cho đơn từ 500.000đ
+        </div>
 
+    </div>
+
+</div>
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+
+    <div class="container">
+
+        <a class="navbar-brand" href="/user">
+            🛍 G7 TTN
         </a>
 
         <button class="navbar-toggler"
+                type="button"
                 data-bs-toggle="collapse"
-                data-bs-target="#nav">
+                data-bs-target="#navbarContent">
 
             <span class="navbar-toggler-icon"></span>
 
         </button>
 
         <div class="collapse navbar-collapse"
-             id="nav">
+             id="navbarContent">
 
-            <!-- MENU -->
-            <ul class="navbar-nav me-auto ms-4">
+            <!-- LEFT MENU -->
+            <ul class="navbar-nav ms-4">
 
                 <li class="nav-item">
-                    <a href="/user"
-                       class="nav-link">
+                    <a class="nav-link"
+                       href="/user">
 
                         Trang chủ
 
@@ -409,8 +691,8 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="/products"
-                       class="nav-link">
+                    <a class="nav-link"
+                       href="/products">
 
                         Sản phẩm
 
@@ -418,8 +700,8 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="/sale"
-                       class="nav-link active text-warning fw-bold">
+                    <a class="nav-link active text-warning fw-bold"
+                       href="/sale">
 
                         🔥 Sale
 
@@ -427,10 +709,10 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="/news"
-                       class="nav-link">
+                    <a class="nav-link"
+                       href="/advertisement">
 
-                        Tin tức
+                        📢 Quảng cáo
 
                     </a>
                 </li>
@@ -438,17 +720,19 @@
             </ul>
 
             <!-- SEARCH -->
-            <form class="d-flex me-3"
+            <form class="d-flex mx-auto search-box"
                   action="/products"
                   method="get">
 
                 <input type="search"
-                       name="keyword"
                        class="form-control rounded-pill me-2"
-                       placeholder="Tìm sản phẩm sale...">
+                       placeholder="Tìm sản phẩm..."
+                       name="keyword">
 
                 <button class="btn btn-light rounded-pill">
+
                     <i class="fa fa-search"></i>
+
                 </button>
 
             </form>
@@ -456,19 +740,87 @@
             <!-- RIGHT -->
             <ul class="navbar-nav align-items-center">
 
-                <li class="nav-item me-3"
-                    sec:authorize="isAuthenticated()">
+                <!-- LOGIN -->
+                <li class="nav-item"
+                    sec:authorize="!isAuthenticated()">
 
-                    <span class="text-white">
-                        👋 <span sec:authentication="name"></span>
-                    </span>
+                    <a href="/login"
+                       class="btn btn-outline-light rounded-pill px-4">
+
+                        Đăng nhập
+
+                    </a>
 
                 </li>
 
-                <li class="nav-item">
+                <!-- USER -->
+                <li class="nav-item dropdown"
+                    sec:authorize="isAuthenticated()">
+
+                    <a class="nav-link dropdown-toggle text-white"
+                       href="#"
+                       data-bs-toggle="dropdown">
+
+                        👋 <span sec:authentication="name"></span>
+
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-end">
+
+                        <li>
+                            <a class="dropdown-item"
+                               href="/profile">
+
+                                <i class="fa fa-user me-2"></i>
+                                Thông tin cá nhân
+
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item"
+                               href="/orders">
+
+                                <i class="fa fa-box me-2"></i>
+                                Đơn hàng
+
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item"
+                               href="/cart">
+
+                                <i class="fa fa-cart-shopping me-2"></i>
+                                Giỏ hàng
+
+                            </a>
+                        </li>
+
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item text-danger"
+                               href="/logout">
+
+                                <i class="fa fa-right-from-bracket me-2"></i>
+                                Đăng xuất
+
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </li>
+
+                <!-- CART -->
+                <li class="nav-item ms-3"
+                    sec:authorize="isAuthenticated()">
 
                     <a href="/cart"
-                       class="btn btn-danger rounded-pill">
+                       class="btn btn-danger rounded-pill position-relative">
 
                         <i class="fa fa-cart-shopping"></i>
 
@@ -496,8 +848,8 @@
             Giảm giá cực sốc lên đến 50% cho toàn bộ sản phẩm
         </p>
 
-        <a href="/products"
-           class="btn btn-light btn-lg rounded-pill px-5 mt-4">
+        <a href="#sale-products"
+           class="btn btn-light hero-btn mt-4">
 
             Mua ngay
 
@@ -507,9 +859,11 @@
 
 </section>
 
+
+
 <!-- ================= INFO ================= -->
 
-<div class="container top-info">
+<div class="container mt-5">
 
     <div class="row g-4">
 
@@ -571,141 +925,241 @@
 
 </div>
 
-<!-- ================= PRODUCT ================= -->
+<!-- ================= CONTENT ================= -->
 
-<div class="container mt-5">
-
-    <div class="d-flex justify-content-between align-items-center mb-4">
-
-        <h2 class="section-title">
-            🔥 Sản phẩm đang giảm giá
-        </h2>
-
-        <span class="text-muted">
-            Tổng:
-            <strong th:text="${#lists.size(products)}"></strong>
-            sản phẩm
-        </span>
-
-    </div>
+<div class="container mt-5" id="sale-products">
 
     <div class="row">
 
-        <div class="col-lg-3 col-md-4 col-sm-6 mb-4"
-             th:each="p : ${products}">
+        <!-- SIDEBAR -->
+        <div class="col-lg-3">
 
-            <div class="card product-card">
+            <div class="filter-box">
 
-                <!-- IMAGE -->
-                <div class="product-img-box">
+                <h5 class="filter-title">
+                     Danh mục sale
+                </h5>
 
-                    <!-- SALE -->
-                    <div class="sale-badge">
+                <a href="/sale"
+                   class="category-link">
 
-                        -<span th:text="${p.sale.discountpercent}">
-                        </span>%
+                    <span>Tất cả sản phẩm</span>
 
-                    </div>
+                    <i class="fa fa-angle-right"></i>
 
-                    <!-- HOT -->
-                    <div class="hot-badge">
-                        HOT
-                    </div>
+                </a>
 
-                    <!-- IMAGE -->
-                    <img th:src="@{/images/{img}(img=${p.image})}"
-                         class="product-img"
-                         th:alt="${p.name}">
+                <a href="#"
+                   class="category-link">
 
-                    <!-- ACTION -->
-                    <div class="product-action">
+                    <span>Áo sơ mi</span>
 
-                        <a th:href="@{'/product/' + ${p.id}}"
-                           class="btn btn-light rounded-pill px-4">
+                    <i class="fa fa-angle-right"></i>
 
-                            Xem chi tiết
+                </a>
 
-                        </a>
+                <a href="#"
+                   class="category-link">
 
-                    </div>
+                    <span>Quần jean</span>
 
-                </div>
+                    <i class="fa fa-angle-right"></i>
 
-                <!-- BODY -->
-                <div class="product-body">
+                </a>
 
-                    <!-- NAME -->
-                    <div class="product-name"
-                         th:text="${p.name}">
-                    </div>
+                <a href="#"
+                   class="category-link">
 
-                    <!-- BRAND -->
-                    <div class="brand mt-1"
-                         th:text="${p.brand}">
-                    </div>
+                    <span>Áo polo</span>
 
-                    <!-- OLD PRICE -->
-                    <div class="old-price">
+                    <i class="fa fa-angle-right"></i>
 
-                        <span th:text="${#numbers.formatDecimal(
-                            p.price,
-                            0,
-                            'COMMA',
-                            0,
-                            'POINT')}">
-                        </span>
+                </a>
 
-                        VNĐ
+                <a href="#"
+                   class="category-link">
 
-                    </div>
+                    <span>Áo khoác</span>
 
-                    <!-- NEW PRICE -->
-                    <div class="new-price">
+                    <i class="fa fa-angle-right"></i>
 
-                        <span th:text="${#numbers.formatDecimal(
-                        p.price - (p.price * p.sale.discountpercent / 100),
-                        0,
-                        'COMMA',
-                        0,
-                        'POINT')}">
-                        </span>
+                </a>
 
-                        VNĐ
+            </div>
+
+            <div class="filter-box">
+
+                <h5 class="filter-title">
+                    💰 Lọc theo giá
+                </h5>
+
+                <form>
+
+                    <div class="mb-3">
+
+                        <input type="number"
+                               class="form-control rounded-pill"
+                               placeholder="Giá từ">
 
                     </div>
 
-                    <!-- SAVE -->
-                    <div class="save-price">
+                    <div class="mb-3">
 
-                        Tiết kiệm:
-                        <span th:text="${#numbers.formatDecimal(
-                        p.price * p.sale.discountpercent / 100,
-                        0,
-                        'COMMA',
-                        0,
-                        'POINT')}">
-                        </span>
-
-                        VNĐ
+                        <input type="number"
+                               class="form-control rounded-pill"
+                               placeholder="Đến">
 
                     </div>
 
-                    <!-- BUTTON -->
-                    <div class="mt-4 d-flex gap-2">
+                    <button class="btn btn-dark rounded-pill w-100 py-2">
+                        Lọc sản phẩm
+                    </button>
 
-                        <a th:href="@{'/product/' + ${p.id}}"
-                           class="btn btn-dark rounded-pill w-50">
+                </form>
 
-                            Xem
+            </div>
 
-                        </a>
+        </div>
 
-                        <a th:href="@{'/cart/add/' + ${p.id}}"
-                           class="btn btn-danger rounded-pill w-50">
+        <!-- PRODUCTS -->
+        <div class="col-lg-9">
 
-                            Thêm
+            <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
 
-                        </a>
+                <h2 class="section-title">
+                     Sản phẩm đang giảm giá
+                </h2>
+
+                <span class="text-muted">
+                    Tổng:
+                    <strong th:text="${#lists.size(products)}"></strong>
+                    sản phẩm
+                </span>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-lg-4 col-md-6 mb-4"
+                     th:each="p : ${products}">
+
+                    <div class="card product-card">
+
+                        <!-- IMAGE -->
+                        <div class="product-img-box">
+
+                            <div class="sale-badge">
+
+                                -<span th:text="${p.sale.discountpercent}">
+                                </span>%
+
+                            </div>
+
+                            <div class="hot-badge">
+                                HOT
+                            </div>
+
+                            <img th:src="@{/uploads/{img}(img=${p.image})}"
+                                 class="product-img"
+                                 th:alt="${p.name}"
+                                 onerror="this.src='/images/no-image.png'">
+
+                            <div class="product-action">
+
+                                <a th:href="@{'/product/' + ${p.id}}"
+                                   class="btn btn-light rounded-pill px-4">
+
+                                    Xem chi tiết
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                        <!-- BODY -->
+                        <div class="product-body">
+
+                            <div class="product-name"
+                                 th:text="${p.name}">
+                            </div>
+
+                            <div class="brand"
+                                 th:text="${p.brand}">
+                            </div>
+
+                            <div class="old-price">
+
+                                <span th:text="${#numbers.formatDecimal(
+                                p.price,
+                                0,
+                                'COMMA',
+                                0,
+                                'POINT')}">
+                                </span>
+
+                                VNĐ
+
+                            </div>
+
+                            <div class="new-price">
+
+                                <span th:text="${#numbers.formatDecimal(
+                                p.price - (p.price * p.sale.discountpercent / 100),
+                                0,
+                                'COMMA',
+                                0,
+                                'POINT')}">
+                                </span>
+
+                                VNĐ
+
+                            </div>
+
+                            <div class="save-price">
+
+                                Tiết kiệm:
+                                <span th:text="${#numbers.formatDecimal(
+                                p.price * p.sale.discountpercent / 100,
+                                0,
+                                'COMMA',
+                                0,
+                                'POINT')}">
+                                </span>
+
+                                VNĐ
+
+                            </div>
+
+                            <div class="stock-badge">
+
+                                Còn
+                                <strong th:text="${p.quantity}"></strong>
+                                sản phẩm
+
+                            </div>
+
+                            <div class="mt-4 d-flex gap-2">
+
+                                <a th:href="@{'/product/' + ${p.id}}"
+                                   class="btn btn-dark rounded-pill w-50">
+
+                                    Xem
+
+                                </a>
+
+                                <a th:href="@{'/cart/add/' + ${p.id}}"
+                                   class="btn cart-btn"
+                                   sec:authorize="isAuthenticated()">
+
+                                    <i class="fa fa-cart-plus"></i>
+                                    Thêm vào giỏ
+
+                                </a>
+
+                            </div>
+
+                        </div>
 
                     </div>
 
@@ -742,6 +1196,88 @@
             Khám phá ngay
 
         </a>
+
+    </div>
+
+</div>
+
+<!-- ================= FEATURE ================= -->
+
+<div class="container mt-5">
+
+    <div class="row g-4">
+
+        <div class="col-md-3">
+
+            <div class="feature-box">
+
+                <div class="feature-icon">
+                    <i class="fa fa-truck"></i>
+                </div>
+
+                <h6>Miễn phí vận chuyển</h6>
+
+                <small>
+                    Cho đơn hàng từ 500.000đ
+                </small>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="feature-box">
+
+                <div class="feature-icon">
+                    <i class="fa fa-rotate-left"></i>
+                </div>
+
+                <h6>Đổi trả dễ dàng</h6>
+
+                <small>
+                    Hỗ trợ đổi trả 7 ngày
+                </small>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="feature-box">
+
+                <div class="feature-icon">
+                    <i class="fa fa-headset"></i>
+                </div>
+
+                <h6>Hỗ trợ 24/7</h6>
+
+                <small>
+                    Hotline: 0964 942 121
+                </small>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="feature-box">
+
+                <div class="feature-icon">
+                    <i class="fa fa-credit-card"></i>
+                </div>
+
+                <h6>Thanh toán bảo mật</h6>
+
+                <small>
+                    Visa • Momo • COD
+                </small>
+
+            </div>
+
+        </div>
 
     </div>
 
@@ -814,7 +1350,6 @@
                 <p>📞 0964 942 121</p>
                 <p>✉ support@g7fashion.com</p>
 
-                <!-- PAYMENT -->
                 <div class="payment-logo">
 
                     <img src="https://cdn-icons-png.flaticon.com/512/196/196578.png">

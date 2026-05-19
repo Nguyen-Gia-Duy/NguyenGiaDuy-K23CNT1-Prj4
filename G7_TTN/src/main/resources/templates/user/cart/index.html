@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Giỏ hàng</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <style>
+        .cart-container {
+            max-width: 1100px;
+            margin: 40px auto;
+        }
+
+        .product-img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .qty-input {
+            width: 70px;
+            text-align: center;
+        }
+
+        .cart-total {
+            font-size: 22px;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container cart-container">
+
+    <h2 class="mb-4">🛒 Giỏ hàng</h2>
+
+    <!-- EMPTY -->
+    <div th:if="${#lists.isEmpty(items)}" class="alert alert-info">
+        Giỏ hàng trống.
+    </div>
+
+    <!-- LIST -->
+    <div th:if="${!#lists.isEmpty(items)}">
+
+        <table class="table table-bordered text-center align-middle">
+
+            <thead class="table-dark">
+            <tr>
+                <th>Sản phẩm</th>
+                <th>Size</th>
+                <th>Màu</th>
+                <th>Giá</th>
+                <th>Số lượng</th>
+                <th>Thành tiền</th>
+                <th>Hành động</th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            <tr th:each="item : ${items}">
+
+                <!-- PRODUCT -->
+                <td class="text-start">
+                    <div class="d-flex align-items-center gap-2">
+
+                        <img th:if="${item.product.image != null}"
+                             th:src="@{'/uploads/' + ${item.product.image}}"
+                             class="product-img">
+
+                        <div th:text="${item.product.name}"></div>
+                    </div>
+                </td>
+
+                <!-- SIZE -->
+                <td th:text="${item.size != null ? item.size.name : '---'}"></td>
+
+                <!-- COLOR -->
+                <td th:text="${item.color != null ? item.color.name : '---'}"></td>
+
+                <!-- PRICE -->
+                <td th:text="${#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT')} + ' ₫'"></td>
+
+                <!-- QTY -->
+                <td>
+                    <form th:action="@{/cart/update}" method="get" class="d-flex justify-content-center gap-1">
+
+                        <input type="hidden" name="detailId" th:value="${item.id}"/>
+
+                        <input type="number"
+                               name="qty"
+                               min="1"
+                               class="form-control qty-input"
+                               th:value="${item.qty}"/>
+
+                        <button class="btn btn-sm btn-primary">OK</button>
+
+                    </form>
+                </td>
+
+                <!-- TOTAL -->
+                <td th:text="${#numbers.formatDecimal(item.price * item.qty, 0, 'COMMA', 0, 'POINT')} + ' ₫'"></td>
+
+                <!-- DELETE -->
+                <td>
+                    <a th:href="@{'/cart/delete/' + ${item.id}}"
+                       class="btn btn-sm btn-danger">
+                        Xóa
+                    </a>
+                </td>
+
+            </tr>
+
+            </tbody>
+
+        </table>
+
+        <!-- TOTAL -->
+        <div class="d-flex justify-content-between align-items-center mt-4">
+
+            <a href="/products" class="btn btn-secondary">
+                ← Tiếp tục mua
+            </a>
+
+            <div class="cart-total">
+                Tổng tiền:
+                <span th:text="${#numbers.formatDecimal(total, 0, 'COMMA', 0, 'POINT')}"></span> ₫
+            </div>
+
+            <div class="d-flex gap-2">
+                <a href="/cart/clear" class="btn btn-warning">Xóa tất cả</a>
+                <a href="/checkout" class="btn btn-success">Thanh toán</a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

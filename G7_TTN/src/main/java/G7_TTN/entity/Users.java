@@ -26,7 +26,10 @@ public class Users {
     private String avatar;
     private String role;
 
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createddate;
+
+    @Temporal(TemporalType.TIMESTAMP)
     private Date updateddate;
     private Integer isdelete;
     private Integer isactive;
